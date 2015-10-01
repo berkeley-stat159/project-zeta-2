@@ -25,11 +25,48 @@ paper in a paragraph.  You should also perform basic sanity check on the data
 (e.g., can you downloaded, can you load the files, confirm that you have the
 correct number of subjects).
 
-Briefly explain what approach you intend to take for exploring
-the data and paper.  If you intend to ``reproduce'' some aspect of the paper,
-explain in exactly what sense you mean to do this.  If you are thinking about
-validating the data describe the assumpution used in the analysis and indicate
-how you might check them.
+
+
+PART I: Data preprocess:
+1. data clean up to remove outlier of the experiment if there is any.
+For instance: use standard deviation to choose stable fMRI results.
+2. collect and separate datasets based on subjects and object categories
+
+PART II: statistic analysis of the dataset:
+1. study wether the fMRI pattern for certain object category is consistent 
+within individual subjects and across different subjects
+2. using student t test to study whether the fMRI pattern for different 
+categories are significant different between each other within individual 
+subjects and across different subjects
+3. study which object category has the most consistent fMRI pattern across 
+different subjects. Which one has the least consistency. 
+Create a ranking for consistency and see if is can be explained.
+
+PART III: brain structure/cross talk study:
+1. Study whether there is a specific brain region important for common 
+object recognition. Find a region that is always activated when 
+performing all experiment.
+2. study whether there is a specific brain region for specific object 
+recognition. For instance, is there a specific region for face recognition?
+3. Study whether the activated brain regions are associated with brain 
+regions that are known to mediate vision and/or cognition and/or memory.
+
+PART IV: Machine learning and object prediction:
+1. using machine learning approach to develop a model to predict observing 
+object based on these fMRI results:
+We will separate the datasets into mainly two groups. One of them will 
+be used to develop machine learning models to predict observing objects. 
+Then, we will use the other group to examine the accuracy of our 
+prediction model.
+a. using logistic regression to perform the machine learning
+b. using neural network approach to perform the machine learning
+2. Study if there is a specific category which gives us higher accuracy. 
+For instance, face recognition is important for daily life. 
+Does our brain recognize face with higher accuracy compare to others?
+3. acquire new datasets from other sources to examine the accuracy of 
+our model for predicting object recognition. (Ideally)
+
+ 
 
 \bibliography{proposal}
 
