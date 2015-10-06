@@ -1,8 +1,9 @@
 \documentclass[11pt]{article}
 \bibliographystyle{siam}
 
-\title{Visual Object Prediction by Machine Learning : \\ 
-Object Category Approximation Using Non-Maximal Voxel}
+\title{\textbf{Team Zeta Project Proposal}\\
+Visual Object Prediction by Machine Learning: \\ 
+Object Category Approximation Using Non-Maximal Voxels}
 \author{
   Chen, Tzu-Chieh\\
   \texttt{tcchenbtx}
@@ -23,31 +24,23 @@ Object Category Approximation Using Non-Maximal Voxel}
 \begin{document}
 \maketitle
 
-\textbf{\underline{1st Paragraph:}} 
-
-\textbf{Identify a published fMRI paper and the accompanying data
-\cite{lindquist2008statistical}.  You should explain the basic idea of the
-paper in a paragraph. You should also perform basic sanity check on the data
-(e.g., can you downloaded, can you load the files, confirm that you have the
-correct number of subjects).}\\
-
 The paper, \textbf{\emph{Distributed and Overlapping Representations of Faces
 and Objects in Ventral Temporal Cortex}}\cite{object_rec_main}, collected data 
-from a sample of six subjects of which consists of five females and one male. It 
-presented eight categories of stimuli, faces, houses, chairs, animals, shoes, 
-bottles, tools, and control (phase-scrambled images), to each subject, and 
-wanted to answer the question: if we present different categories of picture 
-stimulus to a subject, whether each stimulus category would evoke the same of 
-category-specific pattern of response in the ventral object vision pathway, and 
-whether we could distinguish individual categories from the patterns of response 
-evoked. Each subject were placed into the functional magnetic resonance imaging 
-(fMRI) for 12 times thus generating 12 time series data. For each time of scanning, 
-it began with 12 seconds of rest, followed by eight stimulus blocks of 24-s 
-duration, one for each category and separated by 12-s intervals of rest, and 
-ended the procedure with another 12 seconds of rest. During each 24-s stimulus 
-blocks, stimuli were presented for 500 ms followed by an interstimulus interval 
-for 1500 ms, thus presented a total of 12 stimuli during each stimulus block 
-and 96 stimuli in a complete experiment run.
+from a sample of six subjects of which consists of five females and one male. 
+It presented eight categories of stimuli, faces, houses, chairs, animals, 
+shoes, bottles, tools, and control (phase-scrambled images), to each subject, 
+and wanted to answer the question: if we present different categories of 
+picture stimulus to a subject, whether each stimulus category would evoke the 
+same of category-specific pattern of response in the ventral object vision 
+pathway, and whether we could distinguish individual categories from the 
+patterns of response evoked. Each subject were placed into the functional 
+magnetic resonance imaging (fMRI) for 12 times thus generating 12 time series 
+data. For each time of scanning, it began with 12 seconds of rest, followed by 
+eight stimulus blocks of 24-s duration, one for each category and separated by 
+12-s intervals of rest, and ended the procedure with another 12 seconds of 
+rest. During each 24-s stimulus blocks, stimuli were presented for 500 ms 
+followed by an interstimulus interval for 1500 ms, thus presented a total of 12 
+stimuli during each stimulus block and 96 stimuli in a complete experiment run.\\
 
 The data collected for each subject were split into two sets: odd runs and even 
 runs. Correlation were used as indices of response similarity, and from 
@@ -64,12 +57,34 @@ conclusion that the pattern of large and small responses, not just the location
 of large responses, carry category-related information, and small responses 
 are an integral part of the representation.\\
 
-\textbf{\underline{2nd Paragraph:}} \\
-\textbf{Briefly explain what approach you intend to take for exploring
-the data and paper.  If you intend to ``reproduce'' some aspect of the paper,
-explain in exactly what sense you mean to do this.  If you are thinking about
-validating the data describe the assumpution used in the analysis and indicate
-how you might check them.}\\
+The dataset for this paper could be found on OpenfMRI database and is curated 
+and available for download. This 2 GB dataset (ds105) contains files that 
+describe the details of this study: general information of this study 
+(README file), research articles associated with this dataset (references.txt), 
+detail information and update for this released dataset 
+(release\textunderscore history.txt), the MR repetition time for this study 
+(scan\textunderscore key.txt), the name of this study 
+(study\textunderscore key.txt), the major task for this study (object viewing) 
+(task\textunderscore key.txt). Besides, the models folder contains two files 
+showing the key conditions (the list of the object category) for this study 
+(condition\textunderscore key.txt) and the comparison setting in this study 
+(tast\textunderscore contrasts.txt). On top of these, each individual subject 
+has his/her own directory to store the detail results. In each of these 
+directories, there are four sub-directories: anatomy, behav, BOLD and model. 
+The anatomy sub-directory contains the high resolution scanning for the head of 
+the subject (highres001.nii.gz), the mask to get the ``brain only'' portion 
+from the scan (highres001\textunderscore brain\textunderscore mask.n\\ii.gz) 
+and the ``brain only'' anatomy result (highres001\textunderscore brain.nii.gz). 
+The behav sub-directory does not contain information since subject behavior 
+does not contribute to this study. The model sub-directory contains detail 
+information, especially the onset time in seconds starting at zero, duration 
+and weighting for each conditions (object category) for the 12 task runs in 
+this study. The BOLD sub-directory contains the fMRI results for all the 12 
+task runs from this specific subject. In each task run directory, we can find 
+the fMRI result (bold.nii.gz) and a QA sub-directory containing the time series 
+analysis report and the preprocessing of the fMRI results during each task run, 
+nii files representing the visual of the brain while looking at specific 
+objects, and confound files for the fMRI result in this study.\\ 
 
 The approach we are taking to explore the data is as follows. First, we will
 pre-process and clean the data in order to produce a dataset for easier
@@ -82,7 +97,7 @@ particular example. In addition, we will utilize machine learning methods to
 build models predicting fMRI blood flow, hence determining what objects people
 are seeing based on past training data. Some regression techniques that are
 available to use for fMRI data include ridge or lasso regression, Principal
-Component Analysis, or regression trees.
+Component Analysis, or regression trees.\\
 
 \bibliography{project}
 \end{document}
