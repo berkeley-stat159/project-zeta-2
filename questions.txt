@@ -11,4 +11,3 @@
 2) What does the get_data() method actually return? Our values range from
    0 to 2500. Are these intensity values? 
 
-3) We knew the world would not be the same. Now I am Oppenheimer.
