@@ -1,0 +1,9 @@
+1. Find position of ventral cortex
+2. Create all 72 CSV files
+	a. Get time slices for each condition
+3. Statistics
+	a. Clean outliers
+	b. Multi-Linear Regression
+	c. Ridge / Lasso / Elastic Net
+	d. Time Series
+	e. Logistics Regression: to find voxels that have activation energy above a certain threshold
