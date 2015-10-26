@@ -1,0 +1,31 @@
+lets focus on subject 1 run 1
+    1. each subject will have 8 condition file corresponding to 8 objects. run 
+       the event2neural() function to find out which of the 121 time units
+       actually give useful images. So, you should get 8 vectors of length 121,
+       with 0s and 1s (about 2 or 3 values will be 1s, others 0s)
+
+    2. now, for each of the conditions(objects) above, go and pull out the 3D
+       image data at the time values of 1. So for each object, you will have 
+       about 2 to 3 3D snapshots of data. 
+    
+    3. Now, we need z-points for this subject. So, scan through all the 3D
+       images, and start looking at (x,y) cross sections for varying z values
+       find z-value at which the vt cortex ends (guesstimate). 
+
+    4. now, for the subject use the selected z-value to generate an evenly
+       spaced z-points from [0, z-value]
+    
+    5. now for this run's 8 objects, run that each object's 3D images and
+       gather 10 xy cross-sections at all your 10 z-points. Each cross section 
+       is an arry of 40x64 intensity values. you should have about 20 or 30 
+       crosssections per object. now average them to get one 40x64 array
+
+    6. now, within each object of this run, flatter the averaged 40x64 array
+       into a 1x2560 vector
+
+    7. now for each object across runs, aggregate the 1x2560 vectors to get 8
+       giant vectors of 1x(2560x6) length for even and odd runs each. 
+
+    8. you should have 16 different vectors of length 1x(2560x6), 8 vetors for 
+       odd & 8 vectors  for even. now correlate each vector with the 15 others, 
+       to get 240 correlations. check for high & low values 
