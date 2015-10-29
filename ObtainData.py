@@ -2,13 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import nibabel as nib
 
-def pull3D(vector):
-	img = nib.load('bold.nii')
-	data = img.get_data()
+def pull3D(DictionaryOfVectors):
 	Three_D_Data = []
-	for i in range(0, len(vector)):
-		if vector[i] == 1:
-			Three_D_Data.append(data[:, :, :, i])
+	for key, value in DictionaryOfVectors.iteritems():
+		vector = value[0]
+		fileLocation = value[1]
+		img = nib.load(fileLocation)
+		data = img.get_data()
+		for i in range(0, len(vector)):
+			if vector[i] == 1:
+				Three_D_Data.append(data[:, :, :, i])
 	return Three_D_Data
 
 def ShowCortex(ListOf3dImages):
