@@ -1,5 +1,5 @@
-% Project Aleph Progress Report
-% Ross Barnowski, Matthew Brett, Jarrod Millman
+% Project Zeta Progress Report
+% Tzu-Chieh Chen, Edith Ho, Zubair Marediya, Mike Tran, Dongping Zhang
 % November 12, 2015
 
 # Background
@@ -7,12 +7,13 @@
 ## The Paper
 
 - from OpenFMRI.org
-- ds001
+- ds005
 
 ## The Data
 
-- 12 subjects
-- 2 conditions per subject
+- 6 subjects
+- 12 runs per subject
+- 8 conditions per run
 
 ## The Method
 
