@@ -17,7 +17,9 @@
 
 ## The Method
 
-- linear regression
+- linear regression (Lasso/Ridge/Elastic Net)
+- Random Forests
+- Boosting
 
 # Initial work
 
@@ -31,7 +33,10 @@
 ## Preprocessing / Validation
 
 - PCA
+- Cross Validation on MSE/Classification Rate
 
 ## Statistical Analysis
 
 - linear model
+- ANOVA/Kruskal-Wallis Test
+
