@@ -1,19 +1,9 @@
-1. find axis = 3, all the z values that covers vt cortex
-    - for each subject, look through all 2-d x,y cross sections to find the 
-      z-values at which the cortex ends (guess it gaga)
-
-2. use z values to select 10 cross sections hights for the subject across all
-   12 runs
-    - meaning to creat an array of intensities with index of elements 
-      to be 2-d position
-    i. start from [z=0, z=your selected z-value (of where the cortex ends]. 
-       make 10 evenly spaced points, pull out the x,y cross sections. you 
-       should have 10 for each subject
-       
-3. within each of the 12 runs of that subject, use the 10 z-points to create 
-10 sets of 40x64 arrays of intensity values
-
-4. within that run, average all 10 arrays to get one averageed array of
-intensities, should be 40x64
-
-5. 
+1. Find position of ventral cortex
+2. Create all 72 CSV files
+	a. Get time slices for each condition
+3. Statistics
+	a. Clean outliers
+	b. Multi-Linear Regression
+	c. Ridge / Lasso / Elastic Net
+	d. Time Series
+	e. Logistics Regression: to find voxels that have activation energy above a certain threshold
