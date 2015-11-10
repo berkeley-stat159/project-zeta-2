@@ -1,5 +1,5 @@
 
-def get_object_neural(sub_ID ,condition_dict, object_name, TR, n_vox, check = 0, ):
+def get_object_neural(sub_ID, condition_dict, TR, n_vox, object_name="all", check=0):
     """
     get object neural array for specific object from all runs, odd runs or even runs
     
@@ -23,22 +23,33 @@ def get_object_neural(sub_ID ,condition_dict, object_name, TR, n_vox, check = 0,
     
     
     """
-    
+
+    # check if the object is valid
+    valid_object = ["house", "scrambledpix", "cat", "shoe", "bottle", "scissors", "chair", "face", "all"]
+    assert (object_name in valid_object)
+
+
     condition_dict_key = condition_dict.keys()
     result = {}
-    for i in condition_dict_key:
-        if check == 1:
-            if object_name in i:
-                if int(i[3:6])%2 ==1:
-                    result[i+'-neural'] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"% sub_ID + i[:6]+"/bold.nii.gz")
-        elif check == 2:
-            if object_name in i: 
-                if int(i[3:6])%2 ==0:
-                    result[i+'-neural'] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"% sub_ID + i[:6]+"/bold.nii.gz")
-        else:
-            if object_name in i:
-                result[i+'-neural'] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"%sub_ID + i[:6]+"/bold.nii.gz")
-    
-    return result
 
+    # to get ALL
+    if object_name == "all":
+        for i in condition_dict_key:
+            result[i] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"% sub_ID + i[:6]+"/bold.nii.gz")
+
+    else:
+        for i in condition_dict_key:
+            if check == 1:
+                if object_name in i:
+                    if int(i[3:6])%2 ==1:
+                        result[i] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"% sub_ID + i[:6]+"/bold.nii.gz")
+            elif check == 2:
+                if object_name in i:
+                    if int(i[3:6])%2 ==0:
+                        result[i] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"% sub_ID + i[:6]+"/bold.nii.gz")
+            else:
+                if object_name in i:
+                    result[i] = (events2neural(condition_dict[i], TR, n_vox), "../data/ds105/%s/BOLD/task001_"%sub_ID + i[:6]+"/bold.nii.gz")
+
+    return result
 
