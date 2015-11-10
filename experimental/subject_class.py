@@ -1,4 +1,5 @@
 from __future__ import print_function, division
+import re
 import numpy as np
 import nibabel as nib
 import matplotlib.pyplot as plt
@@ -18,7 +19,10 @@ class subject(object):
         # runfile_list: ['task001_run001', 'task001_run002'......]
         runfile_list = ['task001_run'+ i+ '.txt' for i in ['001','002','003','004','005','006','007','008','009','010','011','012']]
         runlist = ['run'+ i for i in ['001','002','003','004','005','006','007','008','009','010','011','012']]
-        
+        if self.sub_id == "sub005":
+            runfile_list = runfile_list[:-1]
+            runlist = runlist[:-1]
+
         # TR info:
         self.TR = 2.5
         
