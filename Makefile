@@ -10,6 +10,7 @@ coverage:
 
 test:
 	nosetests code/utils data
+	nosetests experimental/test_experimental.py
 
 verbose:
 	nosetests -v code/utils data
