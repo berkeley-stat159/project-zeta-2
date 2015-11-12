@@ -4,6 +4,8 @@
 
 # Background
 
+![la lune](t_face.png "Voyage to the moon")
+
 ## The Paper
 
 - from OpenFMRI.org
