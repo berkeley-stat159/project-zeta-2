@@ -31,17 +31,23 @@
 ## Exploratory Data Analysis
 
 - Downloaded data
-- Simple plots, summary statistics
-- Cleaned data, extrated useful arrays with BOLD signals
+- Initial analysis: Sub001 Run001
 - Identified and removed outliers (with functions from HW2)
-- Attempted to test our hypothsis with 2 conditions of subject 1
+- Attempted to test our hypothsis
 - Convolution and prediction of BOLD signals
-- Created design matrix
+- Created design matrix for linear regression
+
+## Identify ourliers
+![Outliers in sub001 run001](outlier.png "Outliers in sub001 run001")
+
+## Task time course - Event related design
+![Task time course](Task_time_course.png "Task time course")
 
 ## Convolution Graphs
-![sub1 run1 bold prediction](sub1_run1_stimulation_bold_prediction.png "Bold prediction") 
+![Predicted BOLD](stimulation_bold.png "BOLD prediction") 
 
 ## Design Matrix
+- bottle, cat, chair, face, house, scissors, scrambledpix, shoe, drift1, drift2, ones
 ![Design Matrix](design_matrix.png "Design Matrix")
 
 ## Problems Faced
