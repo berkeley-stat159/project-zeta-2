@@ -1,6 +1,6 @@
-# Project Zeta Progress Report
-## Tzu-Chieh Chen, Edith Ho, Zubair Marediya, Mike Tran, Dongping Zhang
-## November 12, 2015
+% Project Zeta Progress Report
+% Tzu-Chieh Chen, Edith Ho, Zubair Marediya, Mike Tran, Dongping Zhang
+% November 12, 2015
 
 # Background
 
@@ -19,11 +19,14 @@
 ## The Method
 
 - Linear regression (Lasso/Ridge/Elastic Net)
+- T-tests
+- Convolution
+- Smoothing
 
 # Initial work
 
-# Our Hypothesis
-## The differences of BOLD signals between different conditions are significant
+## Our Hypothesis
+- The differences of BOLD signals between different conditions are significant
 
 ## Exploratory Data Analysis
 
@@ -31,30 +34,35 @@
 - Simple plots, summary statistics
 - Cleaned data, extrated useful arrays with BOLD signals
 - Identified and removed outliers (with functions from HW2)
-- Attempted to test our hypothsis with two conditions of subject 1
+- Attempted to test our hypothsis with 2 conditions of subject 1
 - Convolution and prediction of BOLD signals
 - Created design matrix
+
+## Convolution Graphs
+
+## Design Matrix
 
 ## Problems Faced
 
 - Noise within original dataset, causing low resolution brain images
-- Used smoothing techniques to create clearer and more meaning images
 - Drifting of BOLD signals
 - Standardization of BOLD signals across different subjects for comparison
 - Difficulty understanding the study and the dataset itself
 - Hence only did analysis on one subject and one run so far
 
 ## Before And After Smoothing
-
+- Used smoothing techniques to create clearer and more meaningful images
 
 # Next steps
 
-## Preprocessing On The Rest of The Data / Validation
+## Preprocessing On The Rest of The Data/ Validation
 
 - Removing outliers
 - Smoothing on remaining subjects
 - PCA
 - Cross Validation on MSE/Classification Rate
+- Confusion matrix
+- ROC curve
 
 ## Statistical Analysis
 
