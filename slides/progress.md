@@ -24,10 +24,18 @@
 
 # Initial work
 
-## EDA
+# Our Hypothesis
+## The differences of BOLD signals between different conditions are significant
+
+## Exploratory Data Analysis
 
 - Downloaded data
 - Simple plots, summary statistics
+- Cleaned data, extrated useful arrays with BOLD signals
+- Identified and removed outliers (with functions from HW2)
+- Attempted to test our hypothsis with two conditions of subject 1
+- Convolution and prediction of BOLD signals
+- Created design matrix
 
 ## Problems Faced
 
@@ -35,8 +43,11 @@
 - Used smoothing techniques to create clearer and more meaning images
 - Drifting of BOLD signals
 - Standardization of BOLD signals across different subjects for comparison
-- Took a long time to understand the study and the dataset itself
+- Difficulty understanding the study and the dataset itself
 - Hence only did analysis on one subject and one run so far
+
+## Before And After Smoothing
+
 
 # Next steps
 
