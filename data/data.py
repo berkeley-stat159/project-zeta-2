@@ -137,6 +137,10 @@ def check_hashes(d):
         else:
             print("ERROR: The file {0} has the WRONG hash!".format(k))
             all_good = False
+    if (all_good):
+        print("All files have the correct hash.")
+    else:
+        print("At least one file has the WRONG hash. Please check above.")
     return all_good
 
 
