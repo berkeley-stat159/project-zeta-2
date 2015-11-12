@@ -6,37 +6,53 @@
 
 ## The Paper
 
+- 'Distributed and Overlapping Representations of Faces and Objects in VEntral Temporal Cortex'
 - from OpenFMRI.org
-- ds005
+- ds105
 
 ## The Data
 
 - 6 subjects
 - 12 runs per subject
-- 8 conditions per run
+- 8 conditions per run, e.g. faces, houses, cats
 
 ## The Method
 
-- linear regression (Lasso/Ridge/Elastic Net)
-- Random Forests
-- Boosting
+- Linear regression (Lasso/Ridge/Elastic Net)
 
 # Initial work
 
 ## EDA
 
-- downloaded data
-- simple plots, summary statistics
+- Downloaded data
+- Simple plots, summary statistics
+
+## Problems Faced
+
+- Noise within original dataset, causing low resolution brain images
+- Used smoothing techniques to create clearer and more meaning images
+- Drifting of BOLD signals
+- Standardization of BOLD signals across different subjects for comparison
+- Took a long time to understand the study and the dataset itself
+- Hence only did analysis on one subject and one run so far
 
 # Next steps
 
-## Preprocessing / Validation
+## Preprocessing On The Rest of The Data / Validation
 
+- Removing outliers
+- Smoothing on remaining subjects
 - PCA
 - Cross Validation on MSE/Classification Rate
 
 ## Statistical Analysis
 
-- linear model
+- Linear model
 - ANOVA/Kruskal-Wallis Test
+- Time series analysis of BOLD signals
+- Investigating the normality assumption of BOLD signals
 
+## Potential Analysis
+
+- Random Forests
+- Boosting 
