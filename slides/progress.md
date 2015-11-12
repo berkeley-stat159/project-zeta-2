@@ -1,6 +1,6 @@
-% Project Zeta Progress Report
-% Tzu-Chieh Chen, Edith Ho, Zubair Marediya, Mike Tran, Dongping Zhang
-% November 12, 2015
+# Project Zeta Progress Report
+## Tzu-Chieh Chen, Edith Ho, Zubair Marediya, Mike Tran, Dongping Zhang
+## November 12, 2015
 
 # Background
 
