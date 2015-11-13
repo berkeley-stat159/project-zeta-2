@@ -167,7 +167,8 @@ After downloading the data from open fMRI database, the data for
 sub001 run001 was used to perform initial analysis to see if we can identify 
 specific brain region for recognizing specific object like house. 
 
-First, functions from homework 2 were used to identify outliers and remove them. 
+First, functions from homework 2 were used to identify outliers and remove 
+them. 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=120mm]{outlier.png}
@@ -183,18 +184,19 @@ Secondly, we used envents2neural function to generate task time course.
 
 \pagebreak 
 
-Thirdly, we performed convolusion to generate predicted BOLD signals for this dataset.
+Thirdly, we performed convolusion to generate predicted BOLD signals for this 
+dataset.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=120mm]{stimulation_bold.png}
 \caption{Stimulation Bold}
 \end{figure}
 
-Finally, these convolved results for each objects were used as parameters in our 
-design matrix for linear regression. To avoid the drifting problem, we also included 
-two drift parameters in the design matrix. The final design matrix was arranged
-as followed: bottle, cat, chair, face, house, scissors, scrambledpix, shoe, drift1, 
-drift2, average(all ones)
+Finally, these convolved results for each objects were used as parameters in 
+our design matrix for linear regression. To avoid the drifting problem, we also 
+included two drift parameters in the design matrix. The final design matrix was 
+arranged as followed: bottle, cat, chair, face, house, scissors, scrambledpix, 
+shoe, drift1, drift2, average(all ones)
 \begin{figure}[h!]
 \centering
 \includegraphics[width=120mm]{design_matrix.png}
@@ -207,11 +209,11 @@ There are a lot of problems that came up during our analysis. To begin with,
 since most of us have limited neuroscience knowledge, it was very difficult to 
 merely understand the study and the data itself. The research paper of the 
 study uses specific and technical terms that make it hard to comprehend. 
-More time was spent at the earlier stages of this project rereading the original
-paper and exploring the data folders than expected, which slowed down our 
-progress for analysis. Therefore, we only had time to investigate one subject 
-and one run so far. Now that we have a better understanding of the study 
-and the data, we hope to repeat our analysis on the remaining subjects. \\
+More time was spent at the earlier stages of this project rereading the 
+original paper and exploring the data folders than expected, which slowed down 
+our progress for analysis. Therefore, we only had time to investigate one 
+subject and one run so far. Now that we have a better understanding of the 
+study and the data, we hope to repeat our analysis on the remaining subjects.\\
 
 After we understood which part of the data to use, we started our 
 exploratory data analysis. There is a lot of noise within the original dataset, 
