@@ -10,6 +10,10 @@ class subject(object):
         # subject info ex: 'sub001'
         self.sub_id = sub
 
+        # check if the input is valid
+        valid_sub = ["sub001", "sub002", "sub003", "sub004", "sub005", "sub006"]
+        assert self.sub_id in valid_sub, "%s is not a valid input" % self.sub_id
+
         # BOLD folder for this subject
         sub_BOLD_path = "../data/ds105/%s/BOLD/" %self.sub_id
 
@@ -19,6 +23,7 @@ class subject(object):
         # runfile_list: ['task001_run001', 'task001_run002'......]
         runfile_list = ['task001_run'+ i+ '.txt' for i in ['001','002','003','004','005','006','007','008','009','010','011','012']]
         runlist = ['run'+ i for i in ['001','002','003','004','005','006','007','008','009','010','011','012']]
+        # deal with sub005 which has only 11 run results
         if self.sub_id == "sub005":
             runfile_list = runfile_list[:-1]
             runlist = runlist[:-1]
@@ -34,8 +39,10 @@ class subject(object):
         for i in runlist:
             self.run_img_result[self.sub_id + '_' + i] = nib.load(sub_BOLD_path+'task001_'+i+'/bold.nii.gz')
         
-        # all run keys:
-        self.run_keys = self.run_img_result.keys()
+        # ordered run keys:
+        ordered_run_keys = self.run_img_result.keys()
+        ordered_run_keys.sort()
+        self.run_keys = ordered_run_keys
 
         # shape of the BOLD data:
         self.BOLD_shape = self.run_img_result[self.run_keys[1]].shape
