@@ -1,22 +1,22 @@
 import numpy
 import nibabel as nib
 import numpy.linalg as npl
-import os
+# import os
 
-base_path = os.path.abspath(os.path.dirname(__file__))
-base_path = os.path.join(base_path, "..", "..", "data", "ds105")
+# base_path = os.path.abspath(os.path.dirname(__file__))
+# base_path = os.path.join(base_path, "..", "..", "data", "ds105")
 
 # This function takes in the path
 # to an image, and a list of voxel
 # coordinates that you wish to track
 # in another picture. The function will
 # return the corresponding affine values
-# as a list of numpy arrayss.
+# as a list of numpy arrays.
 
-def voxels_to_mm(subject, run, voxellist):
-	subjectpath = os.path.join(base_path, subject, "model", "model001")
-	subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
-	img = nib.load(subjectpath)
+def voxels_to_mm(path, voxellist):
+	# subjectpath = os.path.join(base_path, subject, "model", "model001")
+	# subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
+	img = nib.load(path)
 	vox_to_mm = img.affine
 	mmlist = []
 	for voxel in voxellist:
@@ -28,14 +28,12 @@ def voxels_to_mm(subject, run, voxellist):
 # of numpy arrays and will convert them back to a
 # a list of voxel coordinates as numpy arrays.
 
-def mm_to_voxels(subject, run, mmlist):
-	subjectpath = os.path.join(base_path, subject, "model", "model001")
-	subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
-	img = nib.load(subjectpath)	
+def mm_to_voxels(path, mmlist):
+	# subjectpath = os.path.join(base_path, subject, "model", "model001")
+	# subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
+	img = nib.load(path)	
 	mm_to_vox = npl.inv(img.affine)
 	voxellist = []
 	for mm in mmlist:
 		voxellist.append(nib.affines.apply_affine(mm_to_vox, mm))
 	return voxellist
-
-
