@@ -56,4 +56,3 @@ def test_mm_to_voxels_dummy():
 				np.array([4, 5, 6]),
 				np.array([7, 8, 9])]
 	assert_array_equal(expected, x)
-	
