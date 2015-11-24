@@ -15,12 +15,16 @@ class subject(object):
         self.sub_id = sub
 
         # deal with path problem
-        root_path = "."
-        pattern = re.compile(r'[/\\]')
-        cwd = os.getcwd()
-        check_path = pattern.split(cwd)
-        if "project" not in check_path[-1]:
-            root_path = ".."
+        # root_path = "."
+        # pattern = re.compile(r'[/\\]')
+        # cwd = os.getcwd()
+        # check_path = pattern.split(cwd)
+        # if "project" not in check_path[-1]:
+        #     root_path = ".."
+
+        # use another way to deal with path problem:
+        base_path = os.path.abspath(os.path.dirname(__file__))
+        base_path = os.path.join(base_path, "..")
 
         # check if the input is valid
         valid_sub = ["sub001", "sub002", "sub003", "sub004", "sub005", "sub006"]
@@ -30,10 +34,10 @@ class subject(object):
         # sub_BOLD_path = os.path.join(root_path, "data", "ds105", "%s" % self.sub_id, "BOLD")
 
         # BOLD folder for this subject (preprocessed)
-        sub_BOLD_path = os.path.join(root_path, "data", "ds105_new", "%s" % self.sub_id, "model", "model001")
+        sub_BOLD_path = os.path.join(base_path, "data", "ds105_new", "%s" % self.sub_id, "model", "model001")
 
         # anatomy folder for this subject
-        sub_anatomy_file = os.path.join(root_path, "data", "ds105_old", "%s" % self.sub_id, "anatomy","highres001_brain.nii.gz")
+        sub_anatomy_file = os.path.join(base_path, "data", "ds105_old", "%s" % self.sub_id, "anatomy","highres001_brain.nii.gz")
 
         # runfile_list: ['task001_run001', 'task001_run002'......]
         runfile_list = ['task001_run' + i + '.txt' for i in
@@ -67,7 +71,7 @@ class subject(object):
         self.BOLD_shape = self.run_img_result[self.run_keys[1]].shape
 
         # conditions setting: which condition is for which category
-        condition_key_path = os.path.join(root_path, "data", "ds105_old", "models", "model001", "condition_key.txt")
+        condition_key_path = os.path.join(base_path, "data", "ds105_old", "models", "model001", "condition_key.txt")
         condition_key_file = open(condition_key_path)
         condition_list = condition_key_file.readlines()
         condition = re.compile(r'(cond\d+) (\w+)')
@@ -78,7 +82,7 @@ class subject(object):
         self.condition_key = result
 
         # condition files for each objects for each run
-        sub_condition_path = os.path.join(root_path, "data", "ds105_old", "%s" % self.sub_id, "model", "model001",
+        sub_condition_path = os.path.join(base_path, "data", "ds105_old", "%s" % self.sub_id, "model", "model001",
                                           "onsets")
         self.conditions = {}
         for i in runfile_list:
