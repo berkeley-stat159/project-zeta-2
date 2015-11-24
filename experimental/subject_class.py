@@ -27,11 +27,13 @@ class subject(object):
         assert self.sub_id in valid_sub, "%s is not a valid input" % self.sub_id
 
         # BOLD folder for this subject
-        sub_BOLD_path = os.path.join(root_path, "data", "ds105", "%s" % self.sub_id, "BOLD")
+        # sub_BOLD_path = os.path.join(root_path, "data", "ds105", "%s" % self.sub_id, "BOLD")
+
+        # BOLD folder for this subject (preprocessed)
+        sub_BOLD_path = os.path.join(root_path, "data", "ds105_new", "%s" % self.sub_id, "model", "model001")
 
         # anatomy folder for this subject
-        sub_anatomy_file = os.path.join(root_path, "data", "ds105", "%s" % self.sub_id, "anatomy",
-                                        "highres001_brain.nii.gz")
+        sub_anatomy_file = os.path.join(root_path, "data", "ds105_old", "%s" % self.sub_id, "anatomy","highres001_brain.nii.gz")
 
         # runfile_list: ['task001_run001', 'task001_run002'......]
         runfile_list = ['task001_run' + i + '.txt' for i in
@@ -52,7 +54,8 @@ class subject(object):
         # load all bold image file for this subject
         self.run_img_result = {}
         for i in runlist:
-            img_file_path = os.path.join(sub_BOLD_path, "task001_%s" % i, "bold.nii.gz")
+            # img_file_path = os.path.join(sub_BOLD_path, "task001_%s.feat" % i, "bold.nii.gz")
+            img_file_path = os.path.join(sub_BOLD_path, "task001_%s.feat" % i, "filtered_func_data_mni.nii.gz")
             self.run_img_result[self.sub_id + '_' + i] = nib.load(img_file_path)
 
         # ordered run keys:
@@ -64,7 +67,7 @@ class subject(object):
         self.BOLD_shape = self.run_img_result[self.run_keys[1]].shape
 
         # conditions setting: which condition is for which category
-        condition_key_path = os.path.join(root_path, "data", "ds105", "models", "model001", "condition_key.txt")
+        condition_key_path = os.path.join(root_path, "data", "ds105_old", "models", "model001", "condition_key.txt")
         condition_key_file = open(condition_key_path)
         condition_list = condition_key_file.readlines()
         condition = re.compile(r'(cond\d+) (\w+)')
@@ -75,7 +78,7 @@ class subject(object):
         self.condition_key = result
 
         # condition files for each objects for each run
-        sub_condition_path = os.path.join(root_path, "data", "ds105", "%s" % self.sub_id, "model", "model001",
+        sub_condition_path = os.path.join(root_path, "data", "ds105_old", "%s" % self.sub_id, "model", "model001",
                                           "onsets")
         self.conditions = {}
         for i in runfile_list:
