@@ -18,24 +18,29 @@ dummypath = os.path.join(basepath, "testsub001run001.nii.gz")
 # data.
 
 # def test_voxels_to_mm_real():
-# 	voxellist = [[100, 150, 200],
-# 				 [130, 145, 176],
-# 				 [95, 99, 23]]
-# 	x = affine.voxels_to_mm(realpath, voxellist)
-# 	expected = [np.array([-110, 174, 328]),
-# 				np.array([-170, 164, 280]),
-# 				np.array([-100, 72, -26])]
+# 	img = nib.load(realpath)
+# 	xyarray = np.array([[100, 150],
+# 				 [130, 145],
+# 				 [95, 99]])
+# 	z = 100
+# 	x = affine.voxels_to_mm(img, xyarray, z)
+# 	expected = [np.array([-110, 174, 128]),
+# 				np.array([-170, 164, 128]),
+# 				np.array([-100, 72, 128])]
 # 	assert_array_equal(expected, x)
 
 # def test_mm_to_voxels_real():
-# 	mmlist = [np.array([-110, 174, 328]),
-# 				np.array([-170, 164, 280]),
-# 				np.array([-100, 72, -26])]
-# 	x = affine.mm_to_voxels(realpath, mmlist)
-# 	expected = [np.array([100, 150, 200]),
-# 				np.array([130, 145, 176]),
-# 				np.array([95, 99, 23])]
-# 	assert_array_equal(expected, x)
+# 	img = nib.load(realpath)
+# 	xyarray = np.array([[100, 150],
+# 				 [130, 145],
+# 				 [95, 99]])
+# 	z = 100
+# 	x = affine.voxels_to_mm(img, xyarray, z)	
+# 	y = affine.mm_to_voxels(img, x)
+# 	expected = [np.array([100, 150, 100]),
+# 				np.array([130, 145, 100]),
+# 				np.array([95, 99, 100])]
+# 	assert_array_equal(expected, y)
 
 
 
