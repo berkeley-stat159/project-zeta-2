@@ -1,39 +1,39 @@
-import numpy
+import numpy as np
 import nibabel as nib
 import numpy.linalg as npl
-# import os
 
-# base_path = os.path.abspath(os.path.dirname(__file__))
-# base_path = os.path.join(base_path, "..", "..", "data", "ds105")
+# This function takes in an image, a 2D array,
+# and a z value. It will return a 3D array with
+# mm coordinates for each of the x, y pairs in 
+# the 2D array with a z-coordinate of z.
 
-# This function takes in the path
-# to an image, and a list of voxel
-# coordinates that you wish to track
-# in another picture. The function will
-# return the corresponding affine values
-# as a list of numpy arrays.
+def voxels_to_mm(img, xyarray, z):
+	xyshape = xyarray.shape
+	xyzshape = (xyshape[0], xyshape[1] + 1)
+	xyzarray = np.zeros(xyzshape)
+	xyzarray[:, : - 1] = xyarray
+	xyzarray[:, -1] = z
+	vox_to_mm = convert_to_mm(img)
+	return np.apply_along_axis(vox_to_mm, axis = 1, arr = xyzarray)
 
-def voxels_to_mm(path, voxellist):
-	# subjectpath = os.path.join(base_path, subject, "model", "model001")
-	# subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
-	img = nib.load(path)
-	vox_to_mm = img.affine
-	mmlist = []
-	for voxel in voxellist:
-		mmlist.append(nib.affines.apply_affine(vox_to_mm, voxel))
-	return mmlist
+# Helper method to use np.apply_along_axis
 
-# This function will be the inverse of the
-# function above. Thus, it will take in a list
-# of numpy arrays and will convert them back to a
-# a list of voxel coordinates as numpy arrays.
+def convert_to_mm(img):
+	def inputvoxel(voxel):
+		vox_to_mm = img.affine
+		return nib.affines.apply_affine(vox_to_mm, voxel)
+	return inputvoxel
 
-def mm_to_voxels(path, mmlist):
-	# subjectpath = os.path.join(base_path, subject, "model", "model001")
-	# subjectpath = os.path.join(subjectpath, run, "filtered_func_data_mni.nii.gz")
-	img = nib.load(path)	
-	mm_to_vox = npl.inv(img.affine)
-	voxellist = []
-	for mm in mmlist:
-		voxellist.append(nib.affines.apply_affine(mm_to_vox, mm))
-	return voxellist
+# This function will be the inverse of voxels_to_mm.
+
+def mm_to_voxels(img, xyzarray):
+	mm_to_vox = convert_to_vox(img)
+	return np.apply_along_axis(mm_to_vox, axis = 1, arr = xyzarray)
+
+# Helper method to use np.apply_along_axis
+
+def convert_to_vox(img):
+	def inputmm(mm):
+		mm_to_vox = npl.inv(img.affine)
+		return nib.affines.apply_affine(mm_to_vox, mm)
+	return inputmm

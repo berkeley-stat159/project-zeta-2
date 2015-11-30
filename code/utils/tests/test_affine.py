@@ -2,6 +2,7 @@ import numpy as np
 from .. import affine
 import os
 from numpy.testing import assert_array_equal
+import nibabel as nib
 
 basepath = os.path.abspath(os.path.dirname(__file__))
 
@@ -36,23 +37,26 @@ dummypath = os.path.join(basepath, "testsub001run001.nii.gz")
 # 				np.array([95, 99, 23])]
 # 	assert_array_equal(expected, x)
 
+
+
 def test_voxels_to_mm_dummy():
-	voxellist = [[1, 2, 3],
-				 [4, 5, 6],
-				 [7, 8, 9]]
-	x = affine.voxels_to_mm(dummypath, voxellist)
-	expected = [np.array([1, 2, 3]),
-				np.array([4, 5, 6]),
-				np.array([7, 8, 9])]
+	img = nib.load(dummypath)
+	xyarray = np.array([[1, 2], [3, 4], [5, 6]])
+	z = 100
+	x = affine.voxels_to_mm(img, xyarray, z)
+	expected = [np.array([1, 2, 100]),
+				np.array([3, 4, 100]),
+				np.array([5, 6, 100])]
 	assert_array_equal(expected, x)
 
 
 def test_mm_to_voxels_dummy():
-	mmlist = [np.array([1, 2, 3]),
-			  np.array([4, 5, 6]),
-			  np.array([7, 8, 9])]
-	x = affine.mm_to_voxels(dummypath, mmlist)
-	expected = [np.array([1, 2, 3]),
-				np.array([4, 5, 6]),
-				np.array([7, 8, 9])]
-	assert_array_equal(expected, x)
+	img = nib.load(dummypath)
+	xyarray = np.array([[1, 2], [3, 4], [5, 6]])
+	z = 100
+	x = affine.voxels_to_mm(img, xyarray, z)
+	y = affine.mm_to_voxels(img, x)
+	expected = [np.array([1, 2, 100]),
+				np.array([3, 4, 100]),
+				np.array([5, 6, 100])]
+	assert_array_equal(expected, y)
