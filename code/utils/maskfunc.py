@@ -13,11 +13,11 @@ def generateMaskedBrain(allFiguresDict):
 		data = value
 		vol_mean = np.mean(data, axis = -1)
 		percentile = np.percentile(np.ravel(vol_mean), q = 80)
-		data[vol_mean > percent, :] = True
-		data[vol_mean < perecent, :] = False
-		maskedDict[key] = data
+		data[vol_mean > percentile, :] = True
+		data[vol_mean < percentile, :] = False
+		maskedDict[key] = vol_mean > percentile
 		volumeDict[key] = vol_mean
-    return maskedDict, volumeDict	
+	return maskedDict, volumeDict
 
 #def generateMaskedBrain(paths):
 	#for path in paths:
@@ -47,6 +47,20 @@ def generateMaskedBrain(allFiguresDict):
 		# plt.show()
 		# plt.imshow(in_brain_mask[:, :, 50])
 		# plt.show()
+
+def generateMask(allFiguresDict):
+	maskedDict = {}
+	volumeDict = {}
+	for key, value in allFiguresDict.iteritems():
+		data = value
+		vol_mean = np.mean(data, axis = -1)
+		percentile = np.percentile(np.ravel(vol_mean), q = 80)
+		data[vol_mean > percentile, :] = True
+		data[vol_mean < percentile, :] = False
+		maskedDict[key] = vol_mean > percentile
+		volumeDict[key] = vol_mean
+	return maskedDict, volumeDict
+
 
 def save_obj(obj, name):
 	with open('/Users/mike/Downloads/ds105/sub001/model/model001/task001_run001.feat/' + name + '.pkl', 'wb') as f:
