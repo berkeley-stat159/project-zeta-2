@@ -48,13 +48,13 @@ def generateMaskedBrain(allFiguresDict):
 		# plt.imshow(in_brain_mask[:, :, 50])
 		# plt.show()
 
-def generateMask(allFiguresDict):
+def generateMask(allFiguresDict, percent):
 	maskedDict = {}
 	volumeDict = {}
 	for key, value in allFiguresDict.iteritems():
 		data = value
 		vol_mean = np.mean(data, axis = -1)
-		percentile = np.percentile(np.ravel(vol_mean), q = 80)
+		percentile = np.percentile(np.ravel(vol_mean), q = percent)
 		data[vol_mean > percentile, :] = True
 		data[vol_mean < percentile, :] = False
 		maskedDict[key] = vol_mean > percentile
