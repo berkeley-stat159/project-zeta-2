@@ -53,9 +53,18 @@ match_para = dict(zip(object_list, xrange(8)))
 # check slice:
 slice_number = 32
 
+# separator:
+separator = "-" * 70
 
 # work on subject 1
 ####################
+
+print (separator)
+print ("Project-Zeta: use linear regression to study ds105 dataset")
+print (separator)
+print ("Focus on Sub001 for the analysis")
+print (separator)
+
 
 sub1 = sc.subject("sub001")
 
@@ -63,11 +72,15 @@ sub1 = sc.subject("sub001")
 sub1_img = sub1.run_img_result
 
 # report keys of all images:
+print ("import sub001 images")
+print (separator)
 print ("These images are imported:")
 img_key = sub1_img.keys()
 img_key.sort()
 for i in img_key:
     print (i)
+
+print (separator)
 
 # use rms_diff to check outlier for all 12 runs for subject 1
 
@@ -96,6 +109,8 @@ plt.close()
 
 # remove outlier from images
 sub1_clean_img, outlier_index  = outlier.remove_data_outlier(sub1_img)
+print ("Remove outlier:")
+print (separator)
 print ("outliers are removed from datasets")
 
 # get general all tr times == 121*2.5 = about 300 s
@@ -105,15 +120,22 @@ all_tr_times = np.arange(sub1.BOLD_shape[-1]) * sub1.TR
 # the y-axis to plot hemodynamic prediction is the neural value from condition (on-off)
 sub1_neural = neural.get_object_neural(sub1.sub_id ,sub1.conditions, sub1.TR, sub1.BOLD_shape[-1])
 
+
+
 # report info for all run details
+print (separator)
 print ("The detailed run info for subject 1:")
+print (separator)
 neural_key = sub1_neural.keys()
 neural_key.sort()
 for i in neural_key:
     print (i)
+print (separator)
 
 
 # get task time course for all runs -> save as images
+print ("generate task time course images")
+print (separator)
 for run in xrange(1, 12):
     #plt.figure()
     for item in object_list:
@@ -124,6 +146,8 @@ for run in xrange(1, 12):
     plt.savefig(figure_path + "Task_time_course_sub001_run0%02d" % run)
     plt.clf()
 plt.close()
+print ("task time course images are saved!")
+print (separator)
 
 # assume true HRF starts at zero, and gets to zero sometime before 35 seconds.
 tr_times = np.arange(0, 30, sub1.TR)
@@ -131,8 +155,11 @@ hrf_at_trs = convol.hrf(tr_times)
 
 
 # get convolution data for each objects in this run -> show figure for run001
+print ("Work on convolution based on condition files")
+print (separator)
 sub1_convolved = convol.get_all_convolved(sub1_neural, hrf_at_trs, file_path)
 print ("convolution for all runs is complete")
+print (separator)
 
 # show relationship between stimulation time and bold signals
 sub1_neural_key = sub1_neural.keys()
@@ -228,6 +255,7 @@ for key, betas in all_betas.iteritems():
     beta_vols[key][~check_mask] = np.nan
     mean_data[key][~check_mask] = np.nan
 
+
     for item in object_list:
         for i in xrange(1, 51):
             plt.subplot(5, 10, i)
@@ -245,30 +273,63 @@ for key, betas in all_betas.iteritems():
 
 print ("beta figures are generated!!")
 
-# try to use mask on beta_vols
+#try to use mask on beta_vols
 
-beta_mean_data, beta_mask = msk.generateMask(raw_beta_vols)
-for key, mask in beta_mask.iteritems():
+beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
+for key, meanvol in beta_mean_data.iteritems():
+    plt.hist(np.ravel(meanvol), bins = 100)
+    plt.savefig(figure_path + "histo for %s.png" % key)
+    plt.clf()
+plt.close()
+print ("histogram: Complete!!!!!!!!!!!!!!!")
 
-    plt.imshow(mean_data[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
-
-
-
-
-
-# # check just z = 32
-# run1_house = beta_vols["sub001_run001"][:, 25:50, 32, 5]
-# plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run1_house.png")
-# plt.clf()
-# run2_house = beta_vols["sub001_run002"][:, 25:50, 32, 5]
-# plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_house.png")
-# plt.clf()
-# run2_face = beta_vols["sub001_run002"][:, 25:50, 32, 4]
-# plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_face.png")
+# for key, mask in beta_mask.iteritems():
+#     for i in xrange(1, 51):
+#         plt.subplot(5, 10, i)
+#         lookat = i +20
+#         plt.imshow(beta_mask[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
+#     plt.savefig(figure_path + "mask for %s.png" % key)
+#     plt.clf()
 # plt.close()
+
+
+
+# check just z = 32
+run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
+plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run1_house.png")
+plt.clf()
+run2_house = raw_beta_vols["sub001_run002"][:, 25:50, 32, 5]
+plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run2_house.png")
+plt.clf()
+run2_face = raw_beta_vols["sub001_run002"][:, 25:50, 32, 4]
+plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run2_face.png")
+plt.close()
+
+print ("run correlation coefficient")
+house1 = np.ravel(run1_house)
+house2 = np.ravel(run2_house)
+face2 = np.ravel(run2_face)
+
+# save for pretest analysis
+np.savetxt(file_path + "house1.txt", house1)
+np.savetxt(file_path + "house2.txt", house2)
+np.savetxt(file_path + "face2.txt", face2)
+
+# change nan to 0 in the array
+house1[np.isnan(house1)] = 0
+house2[np.isnan(house2)] = 0
+face2[np.isnan(face2)] = 0
+
+# correlation coefficient study:
+
+house1_house2 = np.corrcoef(house1, house2)
+house1_face2 = np.corrcoef(house1, face2)
+print ("run1 house vs run2 house: %s" % house1_house2)
+print ("run1 house vs run2 face : %s" % house1_face2)
+
 
 # print ("check z = 32")
 # slice_z = {}
