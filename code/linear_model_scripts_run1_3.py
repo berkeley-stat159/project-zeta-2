@@ -226,7 +226,6 @@ print ("Design matrices are saved as figures")
 # use maskfunc to generate mask
 mask, mean_data = msk.generateMaskedBrain(sub1_clean_img)
 
-<<<<<<< HEAD
 # run linear regression to generate betas
 # first step: use mask to get data and reshape to 2D
 sub1_cs_mask_img = lm.apply_mask(sub1_cs_img, mask)
@@ -282,13 +281,13 @@ print ("beta figures are generated!!")
 
 #try to use mask on beta_vols
 
-# beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
-# for key, meanvol in beta_mean_data.iteritems():
-#     plt.hist(np.ravel(meanvol), bins = 100)
-#     plt.savefig(figure_path + "histo for %s.png" % key)
-#     plt.clf()
-# plt.close()
-# print ("histogram: Complete!!!!!!!!!!!!!!!")
+beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
+for key, meanvol in beta_mean_data.iteritems():
+    plt.hist(np.ravel(meanvol), bins = 100)
+    plt.savefig(figure_path + "histo for %s.png" % key)
+    plt.clf()
+plt.close()
+print ("histogram: Complete!!!!!!!!!!!!!!!")
 
 # for key, mask in beta_mask.iteritems():
 #     for i in xrange(1, 51):
@@ -300,89 +299,49 @@ print ("beta figures are generated!!")
 # plt.close()
 
 
-# analyze based on odd runs even runs
-print (separator)
-even_run = {}
-odd_run = {}
-for item in object_list:
-    even_run[item] = np.zeros_like(raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5])
-    odd_run[item] = np.zeros_like(raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5])
-    print ("make average of odd run results:")
-    for i in range(1, 13, 2):
-        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
-        temp[np.isnan(temp)] = 0
-        odd_run[item] += temp
-        print("odd runs: %d-%s" % (i, item))
-    print ("make average od even run results:")
-    odd_run[item] = odd_run[item]/6
 
-    for i in range(2, 14, 2):
-        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
-        temp[np.isnan(temp)] = 0
-        even_run[item] += temp
-        print("even: %d, %s" % (i, item))
-    even_run[item] = odd_run[item]/6
-
-# save odd run and even run results as txt file
-for key, fig in even_run.iteritems():
-    np.savetxt(file_path + "even_%s.txt" % key, np.ravel(fig))
-for key, fig in odd_run.iteritems():
-    np.savetxt(file_path + "odd_%s.txt" % key, np.ravel(fig))
-
-print ("odd run and even run results are saved as txt files!!!!!")
-print (separator)
-
-
-print ("save result for each object and each run individually")
 # check just z = 32
-for i in range(1, 13):
-    for item in object_list:
-        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
-        np.savetxt(file_path + "run0%02d_%s.txt" % (i, item), np.ravel(temp))
-print ("Done!!")
-print (separator)
-#
-# run1_house = raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5]
-# plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run1_house.png")
-# plt.clf()
-# run2_house = raw_beta_vols["sub001_run002"][:, 25:50, slice_number, 5]
-# plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_house.png")
-# plt.clf()
-# run2_face = raw_beta_vols["sub001_run002"][:, 25:50, slice_number, 4]
-# plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_face.png")
-# plt.close()
-#
-# print ("run correlation coefficient")
-# house1 = np.ravel(run1_house)
-# house2 = np.ravel(run2_house)
-# face2 = np.ravel(run2_face)
-#
-# # save for pretest analysis
-# np.savetxt(file_path + "house1.txt", house1)
-# np.savetxt(file_path + "house2.txt", house2)
-# np.savetxt(file_path + "face2.txt", face2)
-#
-# # change nan to 0 in the array
-# house1[np.isnan(house1)] = 0
-# house2[np.isnan(house2)] = 0
-# face2[np.isnan(face2)] = 0
-#
-# # correlation coefficient study:
-#
-# house1_house2 = np.corrcoef(house1, house2)
-# house1_face2 = np.corrcoef(house1, face2)
-# print ("run1 house vs run2 house: %s" % house1_house2)
-# print ("run1 house vs run2 face : %s" % house1_face2)
-#
-#
-# # print ("check z = 32")
-# # slice_z = {}
-# # for key, betas in beta_vols.iteritems():
-# #     for item in object_list:
-# #         slice_z["%s-%s" % (key, item)] = beta_vols[key][:, 25:30, slice_number, match_para[item]]
+run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
+plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run1_house.png")
+plt.clf()
+run3_house = raw_beta_vols["sub001_run003"][:, 25:50, 32, 5]
+plt.imshow(run3_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run3_house.png")
+plt.clf()
+run3_face = raw_beta_vols["sub001_run003"][:, 25:50, 32, 4]
+plt.imshow(run3_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run3_face.png")
+plt.close()
+
+print ("run correlation coefficient")
+house1 = np.ravel(run1_house)
+house3 = np.ravel(run3_house)
+face3 = np.ravel(run3_face)
+
+# save for pretest analysis
+np.savetxt(file_path + "house1.txt", house1)
+np.savetxt(file_path + "house3.txt", house3)
+np.savetxt(file_path + "face3.txt", face3)
+
+# change nan to 0 in the array
+house1[np.isnan(house1)] = 0
+house3[np.isnan(house3)] = 0
+face3[np.isnan(face3)] = 0
+
+# correlation coefficient study:
+
+house1_house3 = np.corrcoef(house1, house3)
+house1_face3 = np.corrcoef(house1, face3)
+print ("run1 house vs run3 house: %s" % house1_house3)
+print ("run1 house vs run3 face : %s" % house1_face3)
+
+
+# print ("check z = 32")
+# slice_z = {}
+# for key, betas in beta_vols.iteritems():
+#     for item in object_list:
+#         slice_z["%s-%s" % (key, item)] = beta_vols[key][:, 25:30, slice_number, match_para[item]]
 # print ("Taking slice of %d: complete! " % slice_number)
 #
 #
@@ -390,169 +349,44 @@ print (separator)
 # betas_mask, beta_vol_mean = msk.generateMaskedBrain(slice_z)
 # for key, betas in beta_vol_mean.iteritems():
 #     check_mask = (betas_mask[key] == 1)
-=======
-# # run linear regression to generate betas
-# # first step: use mask to get data and reshape to 2D
-# sub1_cs_mask_img = lm.apply_mask(sub1_cs_img, mask)
-# sub1_cs_mask_img_2d = lm.batch_convert_2d_based(sub1_cs_mask_img, shape)
-# # sub1_cs_mask_img_2d = lm.batch_convert_2d(sub1_cs_mask_img)
-
-# # second step: run linear regression to get betas:
-# all_betas = {}
-# for key, img in sub1_cs_mask_img_2d.iteritems():
-#     #img_2d = np.reshape(img, (-1, img.shape[-1]))
-#     Y = img.T
-#     all_betas[key] = npl.pinv(design_matrix[key]).dot(Y)
-# print ("Getting betas from linear regression: complete!")
-
-# # third step: put betas back into it's original place:
-# beta_vols = {}
-# raw_beta_vols = {}
-
-# for key, betas in all_betas.iteritems():
-#     beta_vols[key] = np.zeros(shape[key][:-1] + (parameters,))
-#     check_mask = (mask[key] == 1)
->>>>>>> 87f948e6433e344b9e4cb8d3b0b3ae5d1a962cfb
 #     #check_mask_shape = check_mask.shape
 #     #beta_shape = betas.shape
 #     #beta_vols_shape = beta_vols.shape
 #     # print ("mask shape for %s : %s" % (key, check_mask_shape))
 #     # print ("beta shape for %s : %s" % (key, beta_shape))
 #     # print ("beta_vols shape for %s : %s" % (key, beta_vols_shape))
-
-#     beta_vols[key][check_mask] = betas.T
-#     print ("betas fitted in!")
-#     raw_beta_vols[key] = beta_vols[key]
-
-#     beta_vols[key][~check_mask] = np.nan
-#     mean_data[key][~check_mask] = np.nan
-
-
-#     for item in object_list:
-#         for i in xrange(1, 51):
-#             plt.subplot(5, 10, i)
-#             lookat = i + 20
-#             plt.imshow(mean_data[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
-#             plt.imshow(beta_vols[key][:, :, lookat, match_para[item]], cmap=nice_cmap, alpha=0.5)
-#             ax = plt.gca()
-#             ax.set_xticklabels([])
-#             ax.set_yticklabels([])
-#             ax.set_xlabel("z = %d" % lookat)
-
-#         plt.savefig(figure_path + "betas for %s-%s.png" % (key, item))
-#         plt.clf()
-#     plt.close()
-
-# print ("beta figures are generated!!")
-
-# #try to use mask on beta_vols
-
-# beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
-# for key, meanvol in beta_mean_data.iteritems():
-#     plt.hist(np.ravel(meanvol), bins = 100)
-#     plt.savefig(figure_path + "histo for %s.png" % key)
+#
+#     slice_z[key][~check_mask] = np.nan
+#     beta_vol_mean[key][~check_mask] = np.nan
+#
+#     beta_vol_mean_shape = beta_vol_mean[key].shape
+#     slice_z
+#     print ("shape for beta_vol_mean = %s" % beta_vol_mean_shape )
+#
+#
+#     #plt.imshow(beta_vol_mean[key][:, :, slice_number], interpolation="nearest", cmap="gray", alpha=0.5)
+#     plt.imshow(slice_z[key], cmap=nice_cmap, alpha=0.5)
+#
+#     plt.savefig(figure_path + "MASK_betas for %s.png" % key)
 #     plt.clf()
 # plt.close()
-# print ("histogram: Complete!!!!!!!!!!!!!!!")
 
-# # for key, mask in beta_mask.iteritems():
-# #     for i in xrange(1, 51):
-# #         plt.subplot(5, 10, i)
-# #         lookat = i +20
-# #         plt.imshow(beta_mask[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
-# #     plt.savefig(figure_path + "mask for %s.png" % key)
-# #     plt.clf()
-# # plt.close()
+    #mean_data[key] = np.mean(sub1_cs_img[key], axis=-1)
+    #mean_data[key][~check_mask] = np.nan
 
+    # for item in object_list:
+    #     for i in xrange(1, 51):
+    #         plt.subplot(5, 10, i)
+    #         lookat = i + 20
+    #         #plt.imshow(mean_data[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
+    #         plt.imshow(beta_vols[key][:, :, lookat, match_para[item]], cmap="Reds", alpha=0.5)
+    #         ax = plt.gca()
+    #         ax.set_xticklabels([])
+    #         ax.set_yticklabels([])
+    #         ax.set_xlabel("z = %d" % lookat)
+    #
+    #     plt.savefig(figure_path + "MASK_betas for %s-%s.png" % (key, item))
+    #     plt.clf()
+    # plt.close()
 
-
-# # check just z = 32
-# run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
-# plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run1_house.png")
-# plt.clf()
-# run2_house = raw_beta_vols["sub001_run002"][:, 25:50, 32, 5]
-# plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_house.png")
-# plt.clf()
-# run2_face = raw_beta_vols["sub001_run002"][:, 25:50, 32, 4]
-# plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_face.png")
-# plt.close()
-
-# print ("run correlation coefficient")
-# house1 = np.ravel(run1_house)
-# house2 = np.ravel(run2_house)
-# face2 = np.ravel(run2_face)
-
-# # save for pretest analysis
-# np.savetxt(file_path + "house1.txt", house1)
-# np.savetxt(file_path + "house2.txt", house2)
-# np.savetxt(file_path + "face2.txt", face2)
-
-# # change nan to 0 in the array
-# house1[np.isnan(house1)] = 0
-# house2[np.isnan(house2)] = 0
-# face2[np.isnan(face2)] = 0
-
-# # correlation coefficient study:
-
-# house1_house2 = np.corrcoef(house1, house2)
-# house1_face2 = np.corrcoef(house1, face2)
-# print ("run1 house vs run2 house: %s" % house1_house2)
-# print ("run1 house vs run2 face : %s" % house1_face2)
-
-
-# # print ("check z = 32")
-# # slice_z = {}
-# # for key, betas in beta_vols.iteritems():
-# #     for item in object_list:
-# #         slice_z["%s-%s" % (key, item)] = beta_vols[key][:, 25:30, slice_number, match_para[item]]
-# # print ("Taking slice of %d: complete! " % slice_number)
-# #
-# #
-# # # try to use mask
-# # betas_mask, beta_vol_mean = msk.generateMaskedBrain(slice_z)
-# # for key, betas in beta_vol_mean.iteritems():
-# #     check_mask = (betas_mask[key] == 1)
-# #     #check_mask_shape = check_mask.shape
-# #     #beta_shape = betas.shape
-# #     #beta_vols_shape = beta_vols.shape
-# #     # print ("mask shape for %s : %s" % (key, check_mask_shape))
-# #     # print ("beta shape for %s : %s" % (key, beta_shape))
-# #     # print ("beta_vols shape for %s : %s" % (key, beta_vols_shape))
-# #
-# #     slice_z[key][~check_mask] = np.nan
-# #     beta_vol_mean[key][~check_mask] = np.nan
-# #
-# #     beta_vol_mean_shape = beta_vol_mean[key].shape
-# #     slice_z
-# #     print ("shape for beta_vol_mean = %s" % beta_vol_mean_shape )
-# #
-# #
-# #     #plt.imshow(beta_vol_mean[key][:, :, slice_number], interpolation="nearest", cmap="gray", alpha=0.5)
-# #     plt.imshow(slice_z[key], cmap=nice_cmap, alpha=0.5)
-# #
-# #     plt.savefig(figure_path + "MASK_betas for %s.png" % key)
-# #     plt.clf()
-# # plt.close()
-
-#     #mean_data[key] = np.mean(sub1_cs_img[key], axis=-1)
-#     #mean_data[key][~check_mask] = np.nan
-
-#     # for item in object_list:
-#     #     for i in xrange(1, 51):
-#     #         plt.subplot(5, 10, i)
-#     #         lookat = i + 20
-#     #         #plt.imshow(mean_data[key][:, :, lookat], interpolation="nearest", cmap = "gray", alpha=0.5)
-#     #         plt.imshow(beta_vols[key][:, :, lookat, match_para[item]], cmap="Reds", alpha=0.5)
-#     #         ax = plt.gca()
-#     #         ax.set_xticklabels([])
-#     #         ax.set_yticklabels([])
-#     #         ax.set_xlabel("z = %d" % lookat)
-#     #
-#     #     plt.savefig(figure_path + "MASK_betas for %s-%s.png" % (key, item))
-#     #     plt.clf()
-#     # plt.close()
-
-print ("Analysis Complete!!!")
+print ("Complete!!!")
