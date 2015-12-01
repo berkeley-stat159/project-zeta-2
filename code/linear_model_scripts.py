@@ -226,7 +226,6 @@ print ("Design matrices are saved as figures")
 # use maskfunc to generate mask
 mask, mean_data = msk.generateMaskedBrain(sub1_clean_img)
 
-<<<<<<< HEAD
 # run linear regression to generate betas
 # first step: use mask to get data and reshape to 2D
 sub1_cs_mask_img = lm.apply_mask(sub1_cs_img, mask)
@@ -390,7 +389,6 @@ print (separator)
 # betas_mask, beta_vol_mean = msk.generateMaskedBrain(slice_z)
 # for key, betas in beta_vol_mean.iteritems():
 #     check_mask = (betas_mask[key] == 1)
-=======
 # # run linear regression to generate betas
 # # first step: use mask to get data and reshape to 2D
 # sub1_cs_mask_img = lm.apply_mask(sub1_cs_img, mask)
@@ -412,7 +410,6 @@ print (separator)
 # for key, betas in all_betas.iteritems():
 #     beta_vols[key] = np.zeros(shape[key][:-1] + (parameters,))
 #     check_mask = (mask[key] == 1)
->>>>>>> 87f948e6433e344b9e4cb8d3b0b3ae5d1a962cfb
 #     #check_mask_shape = check_mask.shape
 #     #beta_shape = betas.shape
 #     #beta_vols_shape = beta_vols.shape
@@ -466,41 +463,41 @@ print (separator)
 
 
 
-# # check just z = 32
-# run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
-# plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run1_house.png")
-# plt.clf()
-# run2_house = raw_beta_vols["sub001_run002"][:, 25:50, 32, 5]
-# plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_house.png")
-# plt.clf()
-# run2_face = raw_beta_vols["sub001_run002"][:, 25:50, 32, 4]
-# plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-# plt.savefig(figure_path + "run2_face.png")
-# plt.close()
+# check just z = 32
+run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
+plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run1_house.png")
+plt.clf()
+run2_house = raw_beta_vols["sub001_run002"][:, 25:50, 32, 5]
+plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run2_house.png")
+plt.clf()
+run2_face = raw_beta_vols["sub001_run002"][:, 25:50, 32, 4]
+plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+plt.savefig(figure_path + "run2_face.png")
+plt.close()
 
-# print ("run correlation coefficient")
-# house1 = np.ravel(run1_house)
-# house2 = np.ravel(run2_house)
-# face2 = np.ravel(run2_face)
+print ("run correlation coefficient")
+house1 = np.ravel(run1_house)
+house2 = np.ravel(run2_house)
+face2 = np.ravel(run2_face)
 
-# # save for pretest analysis
-# np.savetxt(file_path + "house1.txt", house1)
-# np.savetxt(file_path + "house2.txt", house2)
-# np.savetxt(file_path + "face2.txt", face2)
+# save for pretest analysis
+np.savetxt(file_path + "house1.txt", house1)
+np.savetxt(file_path + "house2.txt", house2)
+np.savetxt(file_path + "face2.txt", face2)
 
-# # change nan to 0 in the array
-# house1[np.isnan(house1)] = 0
-# house2[np.isnan(house2)] = 0
-# face2[np.isnan(face2)] = 0
+# change nan to 0 in the array
+house1[np.isnan(house1)] = 0
+house2[np.isnan(house2)] = 0
+face2[np.isnan(face2)] = 0
 
-# # correlation coefficient study:
+# correlation coefficient study:
 
-# house1_house2 = np.corrcoef(house1, house2)
-# house1_face2 = np.corrcoef(house1, face2)
-# print ("run1 house vs run2 house: %s" % house1_house2)
-# print ("run1 house vs run2 face : %s" % house1_face2)
+house1_house2 = np.corrcoef(house1, house2)
+house1_face2 = np.corrcoef(house1, face2)
+print ("run1 house vs run2 house: %s" % house1_house2)
+print ("run1 house vs run2 face : %s" % house1_face2)
 
 
 # # print ("check z = 32")
