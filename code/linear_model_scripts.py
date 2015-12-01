@@ -281,13 +281,13 @@ print ("beta figures are generated!!")
 
 #try to use mask on beta_vols
 
-beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
-for key, meanvol in beta_mean_data.iteritems():
-    plt.hist(np.ravel(meanvol), bins = 100)
-    plt.savefig(figure_path + "histo for %s.png" % key)
-    plt.clf()
-plt.close()
-print ("histogram: Complete!!!!!!!!!!!!!!!")
+# beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
+# for key, meanvol in beta_mean_data.iteritems():
+#     plt.hist(np.ravel(meanvol), bins = 100)
+#     plt.savefig(figure_path + "histo for %s.png" % key)
+#     plt.clf()
+# plt.close()
+# print ("histogram: Complete!!!!!!!!!!!!!!!")
 
 # for key, mask in beta_mask.iteritems():
 #     for i in xrange(1, 51):
@@ -299,49 +299,89 @@ print ("histogram: Complete!!!!!!!!!!!!!!!")
 # plt.close()
 
 
+# analyze based on odd runs even runs
+print (separator)
+even_run = {}
+odd_run = {}
+for item in object_list:
+    even_run[item] = np.zeros_like(raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5])
+    odd_run[item] = np.zeros_like(raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5])
+    print ("make average of odd run results:")
+    for i in range(1, 13, 2):
+        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
+        temp[np.isnan(temp)] = 0
+        odd_run[item] += temp
+        print("odd runs: %d-%s" % (i, item))
+    print ("make average od even run results:")
+    odd_run[item] = odd_run[item]/6
 
+    for i in range(2, 14, 2):
+        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
+        temp[np.isnan(temp)] = 0
+        even_run[item] += temp
+        print("even: %d, %s" % (i, item))
+    even_run[item] = odd_run[item]/6
+
+# save odd run and even run results as txt file
+for key, fig in even_run.iteritems():
+    np.savetxt(file_path + "even_%s.txt" % key, np.ravel(fig))
+for key, fig in odd_run.iteritems():
+    np.savetxt(file_path + "odd_%s.txt" % key, np.ravel(fig))
+
+print ("odd run and even run results are saved as txt files!!!!!")
+print (separator)
+
+
+print ("save result for each object and each run individually")
 # check just z = 32
-run1_house = raw_beta_vols["sub001_run001"][:, 25:50, 32, 5]
-plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-plt.savefig(figure_path + "run1_house.png")
-plt.clf()
-run2_house = raw_beta_vols["sub001_run002"][:, 25:50, 32, 5]
-plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-plt.savefig(figure_path + "run2_house.png")
-plt.clf()
-run2_face = raw_beta_vols["sub001_run002"][:, 25:50, 32, 4]
-plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
-plt.savefig(figure_path + "run2_face.png")
-plt.close()
-
-print ("run correlation coefficient")
-house1 = np.ravel(run1_house)
-house2 = np.ravel(run2_house)
-face2 = np.ravel(run2_face)
-
-# save for pretest analysis
-np.savetxt(file_path + "house1.txt", house1)
-np.savetxt(file_path + "house2.txt", house2)
-np.savetxt(file_path + "face2.txt", face2)
-
-# change nan to 0 in the array
-house1[np.isnan(house1)] = 0
-house2[np.isnan(house2)] = 0
-face2[np.isnan(face2)] = 0
-
-# correlation coefficient study:
-
-house1_house2 = np.corrcoef(house1, house2)
-house1_face2 = np.corrcoef(house1, face2)
-print ("run1 house vs run2 house: %s" % house1_house2)
-print ("run1 house vs run2 face : %s" % house1_face2)
-
-
-# print ("check z = 32")
-# slice_z = {}
-# for key, betas in beta_vols.iteritems():
-#     for item in object_list:
-#         slice_z["%s-%s" % (key, item)] = beta_vols[key][:, 25:30, slice_number, match_para[item]]
+for i in range(1, 13):
+    for item in object_list:
+        temp = raw_beta_vols["sub001_run0%02d" % i][:, 25:50, slice_number, match_para[item]]
+        np.savetxt(file_path + "run0%02d_%s.txt" % (i, item), np.ravel(temp))
+print ("Done!!")
+print (separator)
+#
+# run1_house = raw_beta_vols["sub001_run001"][:, 25:50, slice_number, 5]
+# plt.imshow(run1_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+# plt.savefig(figure_path + "run1_house.png")
+# plt.clf()
+# run2_house = raw_beta_vols["sub001_run002"][:, 25:50, slice_number, 5]
+# plt.imshow(run2_house, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+# plt.savefig(figure_path + "run2_house.png")
+# plt.clf()
+# run2_face = raw_beta_vols["sub001_run002"][:, 25:50, slice_number, 4]
+# plt.imshow(run2_face, interpolation="nearest", cmap=nice_cmap, alpha=0.5)
+# plt.savefig(figure_path + "run2_face.png")
+# plt.close()
+#
+# print ("run correlation coefficient")
+# house1 = np.ravel(run1_house)
+# house2 = np.ravel(run2_house)
+# face2 = np.ravel(run2_face)
+#
+# # save for pretest analysis
+# np.savetxt(file_path + "house1.txt", house1)
+# np.savetxt(file_path + "house2.txt", house2)
+# np.savetxt(file_path + "face2.txt", face2)
+#
+# # change nan to 0 in the array
+# house1[np.isnan(house1)] = 0
+# house2[np.isnan(house2)] = 0
+# face2[np.isnan(face2)] = 0
+#
+# # correlation coefficient study:
+#
+# house1_house2 = np.corrcoef(house1, house2)
+# house1_face2 = np.corrcoef(house1, face2)
+# print ("run1 house vs run2 house: %s" % house1_house2)
+# print ("run1 house vs run2 face : %s" % house1_face2)
+#
+#
+# # print ("check z = 32")
+# # slice_z = {}
+# # for key, betas in beta_vols.iteritems():
+# #     for item in object_list:
+# #         slice_z["%s-%s" % (key, item)] = beta_vols[key][:, 25:30, slice_number, match_para[item]]
 # print ("Taking slice of %d: complete! " % slice_number)
 #
 #
@@ -389,4 +429,4 @@ print ("run1 house vs run2 face : %s" % house1_face2)
     #     plt.clf()
     # plt.close()
 
-print ("Complete!!!")
+print ("Analysis Complete!!!")
