@@ -161,6 +161,12 @@ sub1_convolved = convol.get_all_convolved(sub1_neural, hrf_at_trs, file_path)
 print ("convolution for all runs is complete")
 print (separator)
 
+# save convolved data
+for key, data in sub1_convolved.iteritems():
+    np.savetxt(file_path + "convolved_%s.txt" % key, data)
+print ("convolved results are saved as txt files")
+
+
 # show relationship between stimulation time and bold signals
 sub1_neural_key = sub1_neural.keys()
 sub1_neural_key.sort()
