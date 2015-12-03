@@ -88,15 +88,22 @@
 
 ## Correlation
 - correlation between:
-- run1 house vs run2 house = 
-- run1 house vs run2 face = 
+- run1 house vs run2 house = 0.50060026
+- run1 house vs run2 face = 0.76080714
 - run1 house vs run3 house = 0.82295125
 - run1 house vs run3 face = 0.64401008
 - run2 house vs run4 house = 0.52813216
 - run2 house vs run4 face = 0.23481469
 
 - all odds house vs all even face = -0.05986216
-- all odd house vs all even house = 
+- all odd house vs all even house = 1
+
+- correlation highest when comparing same object
 
 ## Time Series
+- ARIMA model, parameters = 1.70360618, -0.05272599, -0.53091966, 1.06627208, 0.63106367
+![ACF and PACF](sub001_run001_corrFunc.png "ACF and PACF")
+![Residual ACF and PACF](sub001_run001_residcorrFunc.png "Residuals ACF and PACF")
+![Residual Plot](sub001_run001_residFit.png "Residuals Plot")
+![Actual vs. Fitted](sub001_run001_TimeSeries.png "Actual vs. Fitted")
 
