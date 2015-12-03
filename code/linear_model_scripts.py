@@ -6,13 +6,15 @@
 # objects in odd and even runs of subject 1
 
 # Load required function and modules:
-
 from __future__ import print_function, division
 import numpy as np
 import numpy.linalg as npl
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import colors
+from matplotlib import gridspec
+# from matplotlib import rcParams
+# rcParams.update({'figure.autolayout': True})
 import os
 import re
 import nibabel as nib
@@ -34,6 +36,12 @@ base_path = os.path.join(base_path, "..")
 figure_path = os.path.join(base_path, "code", "images", "")
 file_path = os.path.join(base_path, "code", "txt", "")
 
+# help to make directory to save
+
+
+
+
+
 # color display:
 object_list = ["bottle", "cat", "chair", "face", "house", "scissors", "scrambledpix", "shoe"]
 # color for stimulation
@@ -54,7 +62,7 @@ match_para = dict(zip(object_list, xrange(8)))
 slice_number = 32
 
 # separator:
-separator = "-" * 70
+separator = "-" * 80
 
 # work on subject 1
 ####################
@@ -84,28 +92,33 @@ print (separator)
 
 # use rms_diff to check outlier for all 12 runs for subject 1
 
-# for key in sub1.run_keys:
-#     data = sub1_img[key].get_data()
-#     rms_diff = diagnos.vol_rms_diff(data)
-#     rms_outlier_indices, rms_thresh = diagnos.iqr_outliers(rms_diff)
-#     y_value2 = [rms_diff[i] for i in rms_outlier_indices]
-#
-#     plt.figure()
-#     plt.plot(rms_diff, label = 'rms')
-#     plt.plot([0,len(rms_diff)],[rms_thresh[1],rms_thresh[1]], "k--",\
-#     label = 'high threshold', color='m')
-#     plt.plot([0,len(rms_diff)],[rms_thresh[0],rms_thresh[0]], "k--",\
-#     label = 'low threshold', color='c')
-#     plt.plot(rms_outlier_indices, y_value2, 'o', color = 'g', label = 'outlier')
-#     plt.xlabel('Scan time course')
-#     plt.ylabel('Volumne RMS difference')
-#     plt.title('Volume RMS Difference with Outliers for %s' % key)
-#     plt.subplot()
-#     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., numpoints = 1)
-#
-#     plt.savefig(figure_path + 'Volume_RMS_Difference_Outliers_%s.png' % key)
-#     plt.clf()
+for key in sub1.run_keys:
+    data = sub1_img[key].get_data()
+    rms_diff = diagnos.vol_rms_diff(data)
+    rms_outlier_indices, rms_thresh = diagnos.iqr_outliers(rms_diff)
+    y_value2 = [rms_diff[i] for i in rms_outlier_indices]
+
+    fig = plt.figure()
+    ax = fig.add_axes([0.1, 0.1, 0.55, 0.75])
+
+    ax.plot(rms_diff, label='rms')
+    ax.plot([0,len(rms_diff)], [rms_thresh[1],rms_thresh[1]], "k--",\
+    label= 'high threshold', color='m')
+    ax.plot([0,len(rms_diff)], [rms_thresh[0],rms_thresh[0]], "k--",\
+    label= 'low threshold', color='c')
+    ax.plot(rms_outlier_indices, y_value2, 'o', color = 'g', label='outlier')
+    ax.set_xlabel('Scan time course')
+    ax.set_ylabel('Volumne RMS difference')
+    ax.set_title('Volume RMS Difference with Outliers for %s' % key)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc=0, borderaxespad=0., numpoints = 1)
+
+    fig.savefig(figure_path + 'Volume_RMS_Difference_Outliers_%s.png' % key)
+    fig.clf()
 plt.close()
+
+
+###################
+
 
 # remove outlier from images
 sub1_clean_img, outlier_index  = outlier.remove_data_outlier(sub1_img)
@@ -138,14 +151,18 @@ print ("generate task time course images")
 print (separator)
 for run in xrange(1, 12):
     #plt.figure()
+    fig = plt.figure()
+    ax = fig.add_axes([0.1, 0.1, 0.55, 0.75])
+
     for item in object_list:
         check_key = "run0%02d-%s" % (run, item)
-        plt.plot(all_tr_times, sub1_neural[check_key][0], label="%s" % object, c=match_color_s[item])
-    plt.title("Task time course for sub001-run0%02d" % run)
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., numpoints = 1)
-    plt.savefig(figure_path + "Task_time_course_sub001_run0%02d" % run)
-    plt.clf()
+        ax.plot(all_tr_times, sub1_neural[check_key][0], label="%s" % object, c=match_color_s[item])
+    ax.set_title("Task time course for sub001-run0%02d" % run)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., numpoints = 1)
+    fig.savefig(figure_path + "Task_time_course_sub001_run0%02d" % run)
+    fig.clf()
 plt.close()
+
 print ("task time course images are saved!")
 print (separator)
 
@@ -171,19 +188,20 @@ print ("convolved results are saved as txt files")
 sub1_neural_key = sub1_neural.keys()
 sub1_neural_key.sort()
 for run in xrange(1, 12):
-    #plt.figure()
+    fig = plt.figure()
+    ax = fig.add_axes([0.1, 0.1, 0.4, 0.75])
+
     for item in object_list:
         # plot the convolution/bold signal
         check_key = "run0%02d-%s" % (run, item)
         convolved = convol.convolution(sub1_neural[check_key][0], hrf_at_trs)
-        plt.plot(all_tr_times, convolved, c=match_color_c[item], label="%s-BOLD" % item)
+        ax.plot(all_tr_times, convolved, c=match_color_c[item], label="%s-BOLD" % item)
         # plot the stimulation:
-        plt.plot(all_tr_times, sub1_neural[check_key][0], c=match_color_s[item], label="%s-task" % item)
-    plt.title("hemodynamic prediction of sub001-run0%02d" % run)
-    plt.subplot()
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-    plt.savefig(figure_path + "sub1_run0%02d_bold_prediction.png" % run)
-    plt.clf()
+        ax.plot(all_tr_times, sub1_neural[check_key][0], c=match_color_s[item], label="%s-task" % item)
+    ax.set_title("hemodynamic prediction of sub001-run0%02d" % run)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+    fig.savefig(figure_path + "sub1_run0%02d_bold_prediction.png" % run)
+    fig.clf()
 plt.close()
 
 
@@ -440,17 +458,17 @@ print (separator)
 #         plt.clf()
 #     plt.close()
 
-# print ("beta figures are generated!!")
-
-# #try to use mask on beta_vols
-
-# beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
-# for key, meanvol in beta_mean_data.iteritems():
-#     plt.hist(np.ravel(meanvol), bins = 100)
-#     plt.savefig(figure_path + "histo for %s.png" % key)
-#     plt.clf()
-# plt.close()
-# print ("histogram: Complete!!!!!!!!!!!!!!!")
+# # print ("beta figures are generated!!")
+#
+# # #try to use mask on beta_vols
+#
+# # beta_mean_data, beta_mask = msk.generateMaskedBrain(raw_beta_vols)
+# # for key, meanvol in beta_mean_data.iteritems():
+# #     plt.hist(np.ravel(meanvol), bins = 100)
+# #     plt.savefig(figure_path + "histo for %s.png" % key)
+# #     plt.clf()
+# # plt.close()
+# # print ("histogram: Complete!!!!!!!!!!!!!!!")
 
 # # for key, mask in beta_mask.iteritems():
 # #     for i in xrange(1, 51):
