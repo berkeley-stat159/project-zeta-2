@@ -114,40 +114,52 @@
 - betas for Sub001-Run001-shoe                                                
 ![Sub001-Run00-shoe](betas_for_sub001_run001-shoe.png "Sub1-Run1-Shoe") 
 
-## Focusing on most response area:
-- Examples:
+## Focusing on most response area
+- Example: Run1-House
 ![Run1 House](run1_house.png "Run1 House")
+
+## Focusing on most response area (cont.)                                              
+- Example: Run2-House    
 ![Run2 House](run2_house.png "Run2 House") 
+
+## Focusing on most response area (cont.)                                           
+- Example: Run2-Face    
 ![Run2 Face](run2_face.png "Run2 Face") 
 
 ## Correlation                                                                  
 - correlation between:                                                          
 - run1 house vs run2 house = 0.50060026                                         
-- run1 house vs run2 face = 0.76080714     
+- run1 house vs run2 face  = 0.76080714     
 
 ## Correlation
 - correlation between:
 - run1 house vs run2 house = 0.50060026
-- run1 house vs run2 face = 0.76080714
+- run1 house vs run2 face  = 0.76080714
 - run1 house vs run3 house = 0.82295125
-- run1 house vs run3 face = 0.64401008
+- run1 house vs run3 face  = 0.64401008
 - run2 house vs run4 house = 0.52813216
-- run2 house vs run4 face = 0.23481469
+- run2 house vs run4 face  = 0.23481469
 
 ## Make average for odd runs and even runs
-- House:
-![Odd House](odd_house.png "Odd House")                                      
+- Odd-House:
+![Odd House](odd_house.png "Odd House")
+
+## Make average for odd runs and even runs (cont.)                                     
+- Even-House:                                
 ![Even House](even_house.png "Even House")
 
-## Make average for odd runs and even runs                                      
+## Make average for odd runs and even runs (cont.)                              
 - Face:                                                                        
-![Odd Face](odd_face.png "Odd Face")                                         
+![Odd Face](odd_face.png "Odd Face") 
+
+## Make average for odd runs and even runs (cont.)                              
+- Even-House:                                        
 ![Even Face](even_face.png "Even Face")                                      
                                             
 ## Correlation
 - correlation between:
 - all odds house vs all even face = -0.05986216
-- all odd house vs all even house = 1
+- all odd house vs all even house = 1.00000
 
 - correlation highest when comparing same object
 
