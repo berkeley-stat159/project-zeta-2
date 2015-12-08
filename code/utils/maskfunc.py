@@ -2,7 +2,6 @@ import nibabel as nib
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
-import pandas as pd
 
 # Takes in a dictionary with (K, V) pair (subxxx_runyyy, modified 4D Array)
 # Returns the masked with time collapsed and vol_mean
