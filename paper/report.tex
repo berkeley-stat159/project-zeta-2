@@ -75,42 +75,32 @@ are an integral part of the representation.\\
 
 \section{Data}
 
-The dataset for the study could be found on OpenfMRI database\cite{fmriData} 
-with assession number of ds105, curated and available for download. The
-sub-directory of ds105 contains files that describe the details of this study: 
-general information of this study (README file), research articles 
-associated with this dataset (references.txt), 
-detail information and update for this released dataset 
-(release\textunderscore history.txt), the MR repetition time for this study 
-(scan\textunderscore key.txt), the name of this study 
-(study\textunderscore key.txt), the major task for this study (object viewing) 
-(task\textunderscore key.txt). Besides, the models folder contains two files 
-showing the key conditions (the list of the object category) for this study 
+The study's curated dataset can be found and downloaded on the OpenfMRI 
+database\cite{fmriData} with ds105's accession number. The ds105 
+sub-directory contains files detailing this study, including general information 
+(README file), related research articles (references.txt), detail information 
+and update for this released dataset (release\textunderscore history.txt), 
+the MR repetition time (scan\textunderscore key.txt), the name 
+(study\textunderscore key.txt), and the major task for this study 
+(object viewing) (task\textunderscore key.txt). In addition, the models folder 
+contains files with the key conditions (list of object categories) 
 (condition\textunderscore key.txt) and the comparison setting in this study 
 (tast\textunderscore contrasts.txt). \\
 
-Individual subject has their own directory to store the detail results. In each 
-of these directories, there are four sub-directories: anatomy, behav, BOLD 
-and model. The anatomy sub-directory contains the high resolution scanning
-for the head of the subject (highres001.nii.gz), the mask to get the 
-``brain only'' portion from the scan 
-(highres001\textunderscore brain\textunderscore mask.nii.gz) 
-and the ``brain only'' anatomy result (highres001\textunderscore brain.nii.gz). 
-
-The ``behav" sub-directory does not contain information since subject behavior 
-does not contribute to this study. 
-
-The ``model" sub-directory contains detail 
-information, especially the onset time in seconds starting at zero, duration 
-and weighting for each conditions (object category) for the 12 task runs in 
-this study. 
-
-The ``BOLD" sub-directory contains the fMRI results for all the 12 
-task runs from this specific subject. In each task run directory, we can find 
-the fMRI result (bold.nii.gz) and a QA sub-directory containing the time series 
-analysis report and the preprocessing of the fMRI results during each task run, 
-nii files representing the visual of the brain while looking at specific 
-objects, and confound files for the fMRI result in this study.\\ 
+Subjects have individual directories storing their results. There are four 
+sub-directories in each of the respective directories. The anatomy 
+sub-directory contains high-resolution scans of the subject's head 
+(highres001.nii.gz), mask for obtaining the ``brain only'' scans 
+(highres001\textunderscore brain\textunderscore mask.nii.gz), and the 
+``brain only'' anatomy result (highres001\textunderscore brain.nii.gz). 
+The ``behav" sub-directory is empty since subject's behavior is irrelevant 
+to this study. The ``model" sub-directory provides information such as the 
+onset time (in seconds), and the duration and weighting for each conditions 
+(object category) for the 12 task runs in this study. The ``BOLD" sub-directory 
+contains fMRI results for all 12 task runs for each subject respectively. 
+In each task run directory, we can find the fMRI result (bold.nii.gz) and 
+a QA sub-directory with that run's time series analysis report, fMRI results
+pre-processing and confound files, and visualization of the brain (nii files).\\ 
 
 \section{Methods}
 
