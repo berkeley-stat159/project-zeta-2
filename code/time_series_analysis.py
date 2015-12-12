@@ -54,7 +54,7 @@ sub = sc.subject(subid)
 
 # get image files of this subject:
 sub_img = sub.run_img_result
-
+print(len(sub_img))
 # get data for those figures
 print ("Get data from images...")
 sub_data = {}
@@ -359,31 +359,31 @@ for i in range(8):
 	for j in range(8):
 		all_results[i, j] = np.corrcoef(evenRun[i], oddRun[j])[0, 1]
 
-print(all_results)
+# print(all_results)
 
 #print(arr3)
-# fig = plt.figure(figsize = (12,8))
-# ax1 = fig.add_subplot(211)
-# fig = sm.graphics.tsa.plot_acf(arr, lags = 20, ax = ax1)
-# ax2 = fig.add_subplot(212)
-# fig = sm.graphics.tsa.plot_pacf(arr, lags = 20, ax = ax2)
-# #plt.show()
-# plt.savefig("sub001_run001_corrFunc.png")
-# plt.clf()
-# plt.close()
+fig = plt.figure(figsize = (12,8))
+ax1 = fig.add_subplot(211)
+fig = sm.graphics.tsa.plot_acf(arr1, lags = 20, ax = ax1)
+ax2 = fig.add_subplot(212)
+fig = sm.graphics.tsa.plot_pacf(arr1, lags = 20, ax = ax2)
+#plt.show()
+plt.savefig("sub001_run001_corrFunc.png")
+plt.clf()
+plt.close()
 
-# s1r1_arimaFit = sm.tsa.ARIMA(arr, (2, 0, 0)).fit()
+s1r1_arimaFit = sm.tsa.ARIMA(arr1, (2, 0, 0)).fit()
 # s1r2_arimaFit = sm.tsa.ARIMA(arr2, (1, 0, 1)).fit()
 # s1r3_arimaFit = sm.tsa.ARIMA(arr3, (1, 0, 1)).fit()
 
-# plt.gca().set_color_cycle(['red', 'blue'])
-# plt.plot(a)
-# plt.plot(b)
-# plt.legend(['even', 'odd'], loc='upper left')
-# plt.title("Ratio")
-# plt.savefig("Ratio_TimeSeries.png")
-# plt.clf()
-# plt.close()
+plt.gca().set_color_cycle(['red', 'blue'])
+plt.plot(arr1)
+plt.plot(s1r1_arimaFit.fittedvalues)
+plt.legend(['Actual', 'Fitted'], loc='upper left')
+plt.title("Actual to Fitted Values")
+plt.savefig("Modeling_TimeSeries.png")
+plt.clf()
+plt.close()
 
 # plt.plot(arr5)
 # plt.title("Actual vs Series")
@@ -436,24 +436,24 @@ print(all_results)
 #print(s1r1_arimaFit.params)
 
 # Plot residuals of the fit here
-# plt.plot(s1r1_arimaFit.resid)
-# plt.title("Residuals of ARIMA Model on Run 1")
-# plt.savefig("sub001_run001_residFit.png")
-# plt.clf()
-# plt.close()
+plt.plot(s1r1_arimaFit.resid)
+plt.title("Residuals of ARIMA Model on Run 1")
+plt.savefig("sub001_run001_residFit.png")
+plt.clf()
+plt.close()
 
 # print("P-Value for independence of residuals. If greater than 0.05, model is correct")
 # print(sm.stats.diagnostic.acorr_ljungbox(s1r1_arimaFit.resid, lags = 20))[1]
 
-# fig = plt.figure(figsize = (12,8))
-# ax1 = fig.add_subplot(211)
-# fig = sm.graphics.tsa.plot_acf(s1r1_arimaFit.resid, lags = 20, ax = ax1)
-# ax2 = fig.add_subplot(212)
-# fig = sm.graphics.tsa.plot_pacf(s1r1_arimaFit.resid, lags = 20, ax = ax2)
-# #plt.show()
-# plt.savefig("sub001_run001_residcorrFunc.png")
-# plt.clf()
-# plt.close()
+fig = plt.figure(figsize = (12,8))
+ax1 = fig.add_subplot(211)
+fig = sm.graphics.tsa.plot_acf(s1r1_arimaFit.resid, lags = 20, ax = ax1)
+ax2 = fig.add_subplot(212)
+fig = sm.graphics.tsa.plot_pacf(s1r1_arimaFit.resid, lags = 20, ax = ax2)
+#plt.show()
+plt.savefig("sub001_run001_residcorrFunc.png")
+plt.clf()
+plt.close()
 
 
 
