@@ -6,7 +6,7 @@ import numpy as np
 def generateMaskedBrain(allFiguresDict):
 	maskedDict = {}
 	volumeDict = {}
-	for key, value in allFiguresDict.iteritems():
+	for key, value in allFiguresDict.items():
 		data = value
 		vol_mean = np.mean(data, axis = -1)
 		percentile = np.percentile(np.ravel(vol_mean), q = 80)
@@ -19,7 +19,7 @@ def generateMaskedBrain(allFiguresDict):
 def generateMask(allFiguresDict, percent):
 	maskedDict = {}
 	volumeDict = {}
-	for key, value in allFiguresDict.iteritems():
+	for key, value in allFiguresDict.items():
 		data = value
 		vol_mean = np.mean(data, axis = -1)
 		percentile = np.percentile(np.ravel(vol_mean), q = percent)
