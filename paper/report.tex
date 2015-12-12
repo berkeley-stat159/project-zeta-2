@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,twocolumn]{article}
 \bibliographystyle{siam}
 
 \usepackage[margin=0.75in]{geometry}
@@ -38,59 +38,28 @@ we predict what category the stimulus is?
 
 \section{Introduction}
 
-The paper, \emph{Distributed and Overlapping Representations of Faces
+Haxby et al's study, \emph{Distributed and Overlapping Representations of Faces
 and Objects in Ventral Temporal Cortex}\cite{objectrec}, collected data 
 from a sample of six subjects of which consists of five females and one male. 
-It presented eight categories of stimuli, faces, houses, chairs, animals, 
-shoes, bottles, tools, and control (phase-scrambled images), to each subject, 
-and wanted to answer the question: if we present different categories of 
-picture stimulus to a subject, whether each stimulus category would evoke the 
-same of category-specific pattern of response in the ventral object vision 
-pathway, and whether we could distinguish individual categories from the 
-patterns of response evoked. \\
+It presented two categories of natural stimuli, which are faces, cats, 
+five categories of man-made objects, which are chairs, shoes, bottles, tools, houses, and non-sense pictures of phase-scrambled images, to each subject. 
+The study wanted to answer the questions: if we present different categories of 
+visual stimuli to a subject, would each visual stimulus category evoke the 
+same category-specific pattern of response in the ventral object vision 
+pathway? Could we distinguish individual categories from the 
+patterns of response evoked? \\
 
 Each subject were placed into the functional 
 magnetic resonance imaging (fMRI) for 12 times thus generating 12 time series 
-data. For each time of scanning, it began with 12-s rest, followed by 
-eight stimulus blocks of 24-s duration, one for each category and separated by 
-12-s intervals of rest, and ended the procedure with another 12-s rest. During 
-each 24-s stimulus blocks, stimuli were presented for 500 ms followed by an 
-interstimulus interval for 1500 ms, thus presented a total of 12 stimuli during 
+data. One complete experiment run lasted 300s. It began with 12s of rest, followed by 8 stimulus blocks of 24s duration, one for each category of visual stimuli. There were 12s intervals of rest between any two stimulus blocks, and 
+the whole procedure ended with another 12s of rest. 
+During each stimulus blocks, each picture stimulus were presented for 0.5s 
+followed by an interstimulus interval for 1.5 ms, thus presented a total of 
+12 stimuli during 
 each stimulus block and 96 stimuli in a complete experiment run.\\
 
-\section{Data}
-
-The dataset for this paper could be found on OpenfMRI database and is curated 
-and available for download. This 2 GB dataset (ds105) contains files that 
-describe the details of this study: general information of this study 
-(README file), research articles associated with this dataset (references.txt), 
-detail information and update for this released dataset 
-(release\textunderscore history.txt), the MR repetition time for this study 
-(scan\textunderscore key.txt), the name of this study 
-(study\textunderscore key.txt), the major task for this study (object viewing) 
-(task\textunderscore key.txt). Besides, the models folder contains two files 
-showing the key conditions (the list of the object category) for this study 
-(condition\textunderscore key.txt) and the comparison setting in this study 
-(tast\textunderscore contrasts.txt). On top of these, each individual subject 
-has his/her own directory to store the detail results. In each of these 
-directories, there are four sub-directories: anatomy, behav, BOLD and model. 
-The anatomy sub-directory contains the high resolution scanning for the head of 
-the subject (highres001.nii.gz), the mask to get the ``brain only'' portion 
-from the scan (highres001\textunderscore brain\textunderscore mask.n\\ii.gz) 
-and the ``brain only'' anatomy result (highres001\textunderscore brain.nii.gz). 
-The behav sub-directory does not contain information since subject behavior 
-does not contribute to this study. The model sub-directory contains detail 
-information, especially the onset time in seconds starting at zero, duration 
-and weighting for each conditions (object category) for the 12 task runs in 
-this study. The BOLD sub-directory contains the fMRI results for all the 12 
-task runs from this specific subject. In each task run directory, we can find 
-the fMRI result (bold.nii.gz) and a QA sub-directory containing the time series 
-analysis report and the preprocessing of the fMRI results during each task run, 
-nii files representing the visual of the brain while looking at specific 
-objects, and confound files for the fMRI result in this study.\\ 
-
-The data collected for each subject were split into two sets: odd runs and even 
-runs. Correlation were used as indices of response similarity, and from 
+In Haxby et al's study, the data collected for each subject were split into two 
+runs: odd runs and even runs. Correlation were used as indices of response similarity, and from 
 analyzing within-category correlation and between-category correlation, the 
 result suggested that category-specific patterns of response were distributed 
 and overlapping. The result brought a new question of whether each stimulus 
@@ -103,6 +72,35 @@ barely diminished the accuracy of identification. The research reached a
 conclusion that the pattern of large and small responses, not just the location 
 of large responses, carry category-related information, and small responses 
 are an integral part of the representation.\\
+
+\section{Data}
+
+The study's curated dataset can be found and downloaded on the OpenfMRI 
+database\cite{fmriData} with ds105's accession number. The ds105 
+sub-directory contains files detailing this study, including general information 
+(README file), related research articles (references.txt), detail information 
+and update for this released dataset (release\textunderscore history.txt), 
+the MR repetition time (scan\textunderscore key.txt), the name 
+(study\textunderscore key.txt), and the major task for this study 
+(object viewing) (task\textunderscore key.txt). In addition, the models folder 
+contains files with the key conditions (list of object categories) 
+(condition\textunderscore key.txt) and the comparison setting in this study 
+(tast\textunderscore contrasts.txt). \\
+
+Subjects have individual directories storing their results. There are four 
+sub-directories in each of the respective directories. The anatomy 
+sub-directory contains high-resolution scans of the subject's head 
+(highres001.nii.gz), mask for obtaining the ``brain only'' scans 
+(highres001\textunderscore brain\textunderscore mask.nii.gz), and the 
+``brain only'' anatomy result (highres001\textunderscore brain.nii.gz). 
+The ``behav" sub-directory is empty since subject's behavior is irrelevant 
+to this study. The ``model" sub-directory provides information such as the 
+onset time (in seconds), and the duration and weighting for each conditions 
+(object category) for the 12 task runs in this study. The ``BOLD" sub-directory 
+contains fMRI results for all 12 task runs for each subject respectively. 
+In each task run directory, we can find the fMRI result (bold.nii.gz) and 
+a QA sub-directory with that run's time series analysis report, fMRI results
+pre-processing and confound files, and visualization of the brain (nii files).\\ 
 
 \section{Methods}
 
@@ -171,14 +169,14 @@ First, functions from homework 2 were used to identify outliers and remove
 them. 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=120mm]{outlier.png}
+\includegraphics[width=90mm]{outlier.png}
 \caption{Outliers}
 \end{figure}
 
 Secondly, we used envents2neural function to generate task time course. 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=120mm]{task_time_course.png}
+\includegraphics[width=90mm]{task_time_course.png}
 \caption{Task Time Course}
 \end{figure}
 

@@ -1,0 +1,20 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww12540\viewh16140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 Correlation between odd and even runs write-up\
+\
+We began our correlation analysis with comparing individual runs manually, which pointed us to some patterns in correlations between different objects and runs. In order to further generalized our findings, we created a correlation table between all objects from odd and even runs. \
+\
+Method:\
+We divided all the runs into two groups (odd and even), and we aggregated all the results from each object within the group. Then, we computed the correlations between the average beta values of each object of each group and all objects in the opposite group. Take all the even runs where the subject was shown an image of a face as an example. We take the compiled array of beta values, and found the correlation between this array and that generated from all the odd runs where the subject was shown the images of a face, bottle, cat, chair, house, scissors, scrambledpix, and shoe respectively. This gives us 8 correlation values. By repeating the same procedures with all the other objects, we created a 8x8 correlation matrix.\
+\
+Results:\
+None of the correlation values are perfectly 1. The diagonal values are correlations between each object with their respective odd or even runs (within-category correlations). All within-category correlation values are larger than 0.6. For bottle, cat, face, house, scrambledpix, and shoe, the respective within-category correlations are higher than all of that object\'92s between-category correlations with other objects. For chair and scissors, the within-category correlations are not higher than all of their between-category correlations.\
+\
+Discussion\
+Most of the within-category correlations we found are fairly similar than the paper\'92s. Some of the values from our analysis are higher than the paper\'92s, which could be due to the fact that we only analyzed correlations between runs for one subject, while the original research paper studied all subjects. It would make sense that correlations are higher when only analyzing brain activity from one brain. \
+Correlations between different objects (between-category correlations) seem fairly random, which also seem to be in line with the original paper\'92s finding. We observe that our between-category correlation values also tend to be higher than those from the paper.\
+To test the reproducibility of the study, we also redid our correlation analysis after excluding the maximally-responsive voxels, which is the top 80% of the intensity values. With the exception of some within-category correlations, most correlation values across all categories dropped after we removed the maximally-responsive voxels. This might be an indication that most of the highly correlated areas tend to have higher responses.}
