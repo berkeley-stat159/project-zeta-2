@@ -359,4 +359,15 @@ for i in range(8):
 	for j in range(8):
 		all_results[i, j] = np.corrcoef(evenRun[i], oddRun[j])[0, 1]
 
-print(all_results)
+object_list = ["bottle", "cat", "chair", "face", "house", "scissor", "scram", "shoe"]
+
+fig = plt.figure(figsize=(8, 4))
+plt.subplot(111, frameon=False, xticks=[], yticks=[])
+table = plt.table(cellText=all_results.round(4), colLabels=object_list, rowLabels=object_list, loc='center', cellLoc='center')
+plt.subplots_adjust(left=0.3, bottom=0, top=0.95)
+fig.text(0.55, 0.75, 'Odd runs', ha='left', fontsize=12)
+fig.text(0.05, 0.52, 'Even runs', ha='left', rotation=90, fontsize=12)
+fig.text(0.3, 0.85, "Correlation of TSA brain images of %s" % subid, weight='bold')
+table.scale(1.2, 1.2)
+plt.savefig(figure_path + "subtracted_correlation_table_%s.png" % subid)
+plt.close()
