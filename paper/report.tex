@@ -76,7 +76,7 @@ are an integral part of the representation.\\
 \section{Data}
 
 The study's curated dataset can be found and downloaded on the OpenfMRI 
-database\cite{fmriData} with ds105's accession number. The ds105 
+database with ds105's accession number. The ds105 
 sub-directory contains files detailing this study, including general information 
 (README file), related research articles (references.txt), detail information 
 and update for this released dataset (release\textunderscore history.txt), 
@@ -169,14 +169,14 @@ First, functions from homework 2 were used to identify outliers and remove
 them. 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm]{outlier.png}
-\caption{Outliers}
+\includegraphics[width=90mm]{Volume_RMS_Difference_Outliers_sub001_run001.png}
+\caption{Remove Outliers}
 \end{figure}
 
 Secondly, we used envents2neural function to generate task time course. 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm]{task_time_course.png}
+\includegraphics[width=90mm]{Task_time_course_sub001_run001.png}
 \caption{Task Time Course}
 \end{figure}
 
@@ -186,7 +186,7 @@ Thirdly, we performed convolusion to generate predicted BOLD signals for this
 dataset.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=120mm]{stimulation_bold.png}
+\includegraphics[width=100mm]{sub002_run001_bold_prediction.png}
 \caption{Stimulation Bold}
 \end{figure}
 
@@ -197,7 +197,7 @@ arranged as followed: bottle, cat, chair, face, house, scissors, scrambledpix,
 shoe, drift1, drift2, average(all ones)
 \begin{figure}[h!]
 \centering
-\includegraphics[width=120mm]{design_matrix.png}
+\includegraphics[width=90mm]{design_matrix_sub001_run001.png}
 \caption{Design Matrix}
 \end{figure}
 
@@ -234,5 +234,9 @@ analyze how BOLD signals under different conditions are related to each
 other across subjects. \\
 
 \bibliography{project}
+
+\include{appendix1_general}
+\include{appendix2_subject1}
+\include{appendix3_cross_subject}
 
 \end{document}
