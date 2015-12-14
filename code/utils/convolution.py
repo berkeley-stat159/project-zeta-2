@@ -29,7 +29,7 @@ def convolution(neural, hrf_at_trs):
 def get_all_convolved (dictionary_of_all_neural, hrf_at_trs, path ="."):
     result = {}
     dict_key = dictionary_of_all_neural.keys()
-    dict_key.sort()
+    dict_key = sorted(dict_key)
     for i in dict_key:
         convolved = convolution(dictionary_of_all_neural[i][0], hrf_at_trs)
         result[i] = convolved
