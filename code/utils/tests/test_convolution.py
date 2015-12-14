@@ -1,8 +1,6 @@
 import numpy as np
 from .. import convolution as co
 from numpy.testing import assert_equal
-import copy
-import math
 
 def test_hrf():
 	x = co.hrf(1)

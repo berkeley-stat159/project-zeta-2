@@ -2,7 +2,6 @@ import numpy as np
 from .. import linear_model as lm
 from numpy.testing import assert_equal
 import copy
-import math
 
 def test_scaleDesignMtx():
 	x = range(16)
