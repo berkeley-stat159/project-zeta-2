@@ -1,5 +1,5 @@
 structure:
-    python structure
+	python structure.py
 
 data:
 	# download raw data from openfmir database
