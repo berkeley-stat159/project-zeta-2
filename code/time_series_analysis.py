@@ -377,7 +377,7 @@ ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(arr1, lags = 20, ax = ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arr1, lags = 20, ax = ax2)
-plt.savefig("sub001_run001_corrFunc.png")
+plt.savefig(figure_path + "sub001_run001_corrFunc.png")
 plt.clf()
 plt.close()
 
@@ -390,16 +390,18 @@ plt.plot(arr1)
 plt.plot(s1r1_arimaFit.fittedvalues)
 plt.legend(['Actual', 'Fitted'], loc='upper left')
 plt.title("Actual vs Fitted Time Series")
-plt.savefig("AFTS.png")
+plt.savefig(figure_path + "AFTS.png")
 plt.clf()
 plt.close()
 
 # Plot residuals of the fit here
 plt.plot(s1r1_arimaFit.resid)
 plt.title("Residuals of ARIMA Model on Run 1")
-plt.savefig("sub001_run001_residFit.png")
+plt.savefig(figure_path + "sub001_run001_residFit.png")
 plt.clf()
 plt.close()
+
+# print(sm.stats.diagnostic.acorr_ljungbox(s1r1_arimaFit.resid))
 
 # print("P-Value for independence of residuals. If greater than 0.05, model is correct")
 # print(sm.stats.diagnostic.acorr_ljungbox(s1r1_arimaFit.resid, lags = 20))[1]
@@ -409,7 +411,7 @@ ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(s1r1_arimaFit.resid, lags = 20, ax = ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(s1r1_arimaFit.resid, lags = 20, ax = ax2)
-plt.savefig("sub001_run001_residcorrFunc.png")
+plt.savefig(figure_path + "sub001_run001_residcorrFunc.png")
 plt.clf()
 plt.close()
 

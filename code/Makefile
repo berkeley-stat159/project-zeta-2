@@ -35,3 +35,12 @@ correlation:
 	python correlation_analysis_scripts_sub5.py
 	python correlation_analysis_scripts_sub6.py
 	python cross_subject_analysis.py
+
+timeseries:
+	python time_series_analysis.py
+	python tsa_s2.py
+	python tsa_s3.py
+	python tsa_s4.py
+	python tsa_s5.py
+	python tsa_s6.py
+	
