@@ -1,5 +1,6 @@
 structure:
-	python structure.py
+	mkdir -p ../code/images
+	mkdir -p ../code/txt
 
 data:
 	# download raw data from openfmir database
