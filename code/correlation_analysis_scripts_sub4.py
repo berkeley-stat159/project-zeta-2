@@ -230,6 +230,7 @@ for i in range(8):
     ax.set_yticks([-0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
     ax.axhline(0, color='black', linewidth=2)
     ax.axvline(0, color='black', linewidth=2)
+    ax.legend((bar_plot1[0], bar_plot2[0]), ('All responding voxels', 'Excluding max responded voxels'), bbox_to_anchor=(0.7, 1.06), loc=2, borderaxespad=0., fontsize=12)
     plt.savefig(figure_path + "%s_2d_%s_total_correlation_bar_both.png" % (subid, object_list[i]))
     plt.clf()
 plt.close()
@@ -475,8 +476,8 @@ fig = plt.figure(figsize=(10, 24))
 for plot_num in range(8):
     i = plot_num -1
     ax = plt.subplot(8, 1, plot_num, frameon=False)
-    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='royalblue')
-    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='deepskyblue')
+    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='darkgoldenrod')
+    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='tan')
     # add some label:
     ax.set_ylabel("Correlation")
     ax.set_title("%s" % object_list[i])
@@ -496,8 +497,8 @@ width = 0.35
 fig = plt.figure(figsize=(12, 5))
 for i in range(8):
     ax = plt.subplot(111, frameon=False)
-    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='royalblue')
-    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='deepskyblue')
+    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='darkgoldenrod')
+    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='tan')
     # add some label:
     ax.set_ylabel("Correlation")
     ax.set_title("%s" % object_list[i])
@@ -508,6 +509,7 @@ for i in range(8):
     ax.set_yticks([-0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
     ax.axhline(0, color='black', linewidth=2)
     ax.axvline(0, color='black', linewidth=2)
+    ax.legend((bar_plot1[0], bar_plot2[0]), ('All responding voxels', 'Excluding max responded voxels'), bbox_to_anchor=(0.7, 1.06), loc=2, borderaxespad=0., fontsize=12)
     plt.savefig(figure_path + "%s_3d_%s_total_correlation_bar_both.png" % (subid, object_list[i]))
     plt.clf()
 plt.close()
