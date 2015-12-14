@@ -1,6 +1,6 @@
-.PHONY: all clean coverage test data validate analysis report data2
+.PHONY: all clean coverage test data validate analysis report
 
-all: clean coverage test data validate analysis report data2
+all: clean coverage test data validate analysis report
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
