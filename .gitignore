@@ -1,6 +1,8 @@
 .DS_Store
 
 # ignore data folder
+data/ds105_old/
+data/ds105_new/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
