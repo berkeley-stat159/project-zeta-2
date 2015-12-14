@@ -9,7 +9,7 @@ def batch_make_design(img_dict, convolved_dict):
     for key, img in img_dict.items():
         time_course = img.shape[-1]
         matrix[key] = np.ones((time_course,(len(object_list)+3)))
-        for i in xrange(matrix[key].shape[-1]-3):
+        for i in range(matrix[key].shape[-1]-3):
             matrix[key][:,i] = convolved_dict[key[7:] +"-"+ object_list[i]]
         LD = np.linspace(-1,1,time_course)
         LD2 = LD**2
