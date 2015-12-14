@@ -6,7 +6,7 @@ from scipy.stats import t as t_dist
 def batch_make_design(img_dict, convolved_dict):
     matrix = {}
     object_list = ["bottle", "cat", "chair", "face", "house", "scissors", "scrambledpix", "shoe"]
-    for key, img in img_dict.iteritems():
+    for key, img in img_dict.items():
         time_course = img.shape[-1]
         matrix[key] = np.ones((time_course,(len(object_list)+3)))
         for i in xrange(matrix[key].shape[-1]-3):
@@ -41,28 +41,28 @@ def scale_design_mtx(X):
 
 def batch_scale_matrix(matrix_dict):
     result = {}
-    for key, matrix in matrix_dict.iteritems():
+    for key, matrix in matrix_dict.items():
         result[key] = scale_design_mtx(matrix)
     return result
 
 
 def batch_convert_2d(img_dict):
     result = {}
-    for key, img in img_dict.iteritems():
+    for key, img in img_dict.items():
         result[key] = np.reshape(img, (-1, img.shape[-1]))
     return result
 
 
 def batch_convert_2d_based(img_dict, shape_dict):
     result = {}
-    for key, img in img_dict.iteritems():
+    for key, img in img_dict.items():
         result[key] = np.reshape(img, (-1, shape_dict[key][-1]))
     return result
 
 
 def apply_mask(img_dict, mask_dict):
     result = {}
-    for key, img in img_dict.iteritems():
+    for key, img in img_dict.items():
         mask = (mask_dict[key] == 1)
         result[key] = img[mask]
     return result

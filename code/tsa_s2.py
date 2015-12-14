@@ -112,58 +112,58 @@ s2r11Vol = volDict["sub002_run011"]
 brain12 = sub_data["sub002_run012"]
 s2r12Masked = maskedDict["sub002_run012"]
 s2r12Vol = volDict["sub002_run012"]
-# Focus on z = 31:36, y = 25 to 50, all of x
+# Focus on z = 32:37, y = 25 to 50, all of x
 
 # brain = brain[:, 25:50, 32, :]
 # s1r1Masked = s1r1Masked[:, 25:50, 32]
 # brain = brain[s1r1Masked, :]
 
-brains2r1 = brain1[:, 25:50, 31:36, :]
-s2r1Masked = s2r1Masked[:, 25:50, 31:36]
+brains2r1 = brain1[:, 25:50, 32:37, :]
+s2r1Masked = s2r1Masked[:, 25:50, 32:37]
 brains2r1 = brains2r1[s2r1Masked, :]
 
-brains2r2 = brain2[:, 25:50, 31:36, :]
-s2r2Masked = s2r2Masked[:, 25:50, 31:36]
+brains2r2 = brain2[:, 25:50, 32:37, :]
+s2r2Masked = s2r2Masked[:, 25:50, 32:37]
 brains2r2 = brains2r2[s2r2Masked, :]
 
-brains2r3 = brain3[:, 25:50, 31:36, :]
-s2r3Masked = s2r3Masked[:, 25:50, 31:36]
+brains2r3 = brain3[:, 25:50, 32:37, :]
+s2r3Masked = s2r3Masked[:, 25:50, 32:37]
 brains2r3 = brains2r3[s2r3Masked, :]
 
-brains2r4 = brain4[:, 25:50, 31:36, :]
-s2r4Masked = s2r4Masked[:, 25:50, 31:36]
+brains2r4 = brain4[:, 25:50, 32:37, :]
+s2r4Masked = s2r4Masked[:, 25:50, 32:37]
 brains2r4 = brains2r4[s2r4Masked, :]
 
-brains2r5 = brain5[:, 25:50, 31:36, :]
-s2r5Masked = s2r5Masked[:, 25:50, 31:36]
+brains2r5 = brain5[:, 25:50, 32:37, :]
+s2r5Masked = s2r5Masked[:, 25:50, 32:37]
 brains2r5 = brains2r5[s2r5Masked, :]
 
-brains2r6 = brain6[:, 25:50, 31:36, :]
-s2r6Masked = s2r6Masked[:, 25:50, 31:36]
+brains2r6 = brain6[:, 25:50, 32:37, :]
+s2r6Masked = s2r6Masked[:, 25:50, 32:37]
 brains2r6 = brains2r6[s2r6Masked, :]
 
-brains2r7 = brain7[:, 25:50, 31:36, :]
-s2r7Masked = s2r7Masked[:, 25:50, 31:36]
+brains2r7 = brain7[:, 25:50, 32:37, :]
+s2r7Masked = s2r7Masked[:, 25:50, 32:37]
 brains2r7 = brains2r7[s2r7Masked, :]
 
-brains2r8 = brain8[:, 25:50, 31:36, :]
-s2r8Masked = s2r8Masked[:, 25:50, 31:36]
+brains2r8 = brain8[:, 25:50, 32:37, :]
+s2r8Masked = s2r8Masked[:, 25:50, 32:37]
 brains2r8 = brains2r8[s2r8Masked, :]
 
-brains2r9 = brain9[:, 25:50, 31:36, :]
-s2r9Masked = s2r9Masked[:, 25:50, 31:36]
+brains2r9 = brain9[:, 25:50, 32:37, :]
+s2r9Masked = s2r9Masked[:, 25:50, 32:37]
 brains2r9 = brains2r9[s2r9Masked, :]
 
-brains2r10 = brain10[:, 25:50, 31:36, :]
-s2r10Masked = s2r10Masked[:, 25:50, 31:36]
+brains2r10 = brain10[:, 25:50, 32:37, :]
+s2r10Masked = s2r10Masked[:, 25:50, 32:37]
 brains2r10 = brains2r10[s2r10Masked, :]
 
-brains2r11 = brain11[:, 25:50, 31:36, :]
-s2r11Masked = s2r11Masked[:, 25:50, 31:36]
+brains2r11 = brain11[:, 25:50, 32:37, :]
+s2r11Masked = s2r11Masked[:, 25:50, 32:37]
 brains2r11 = brains2r11[s2r11Masked, :]
 
-brains2r12 = brain12[:, 25:50, 31:36, :]
-s2r12Masked = s2r12Masked[:, 25:50, 31:36]
+brains2r12 = brain12[:, 25:50, 32:37, :]
+s2r12Masked = s2r12Masked[:, 25:50, 32:37]
 brains2r12 = brains2r12[s2r12Masked, :]
 
 arr1 = [0.0] * 121
@@ -359,4 +359,15 @@ for i in range(8):
 	for j in range(8):
 		all_results[i, j] = np.corrcoef(evenRun[i], oddRun[j])[0, 1]
 
-print(all_results)
+object_list = ["bottle", "cat", "chair", "face", "house", "scissor", "scram", "shoe"]
+
+fig = plt.figure(figsize=(8, 4))
+plt.subplot(111, frameon=False, xticks=[], yticks=[])
+table = plt.table(cellText=all_results.round(4), colLabels=object_list, rowLabels=object_list, loc='center', cellLoc='center')
+plt.subplots_adjust(left=0.3, bottom=0, top=0.95)
+fig.text(0.55, 0.75, 'Odd runs', ha='left', fontsize=12)
+fig.text(0.05, 0.52, 'Even runs', ha='left', rotation=90, fontsize=12)
+fig.text(0.3, 0.85, "Correlation of TSA brain images of %s" % subid, weight='bold')
+table.scale(1.2, 1.2)
+plt.savefig(figure_path + "subtracted_correlation_table_%s.png" % subid)
+plt.close()
