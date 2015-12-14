@@ -1,8 +1,6 @@
 import numpy as np
 from .. import get_object_neural as gon
 from numpy.testing import assert_equal
-import copy
-import math
 
 def testFile1():
 	sub_ID = 1
