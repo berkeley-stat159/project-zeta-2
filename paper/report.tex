@@ -28,49 +28,47 @@ Object Category Approximation Using Non-Maximal Voxels}
 \maketitle
 
 \abstract{}
-If we present different categories of 
-picture stimulus to a subject, would each stimulus category  evoke the 
+If we present different types of 
+visual stimulus to a subject, would each stimulus evoke the 
 same category-specific pattern of response in the ventral object vision 
-pathway? Furthermore, can we distinguish individual categories from the 
-patterns of response evoked? Using the patterns of response evoked, could
-we predict what category the stimulus is?
-
+pathway? Furthermore, can we determine and predict individual
+categories from the patterns of response evoked? 
 
 \section{Introduction}
 
-Haxby et al's study, \emph{Distributed and Overlapping Representations of Faces
-and Objects in Ventral Temporal Cortex}\cite{objectrec}, collected data 
-from a sample of six subjects of which consists of five females and one male. 
-It presented two categories of natural stimuli, which are faces, cats, 
-five categories of man-made objects, which are chairs, shoes, bottles, tools, houses, and non-sense pictures of phase-scrambled images, to each subject. 
-The study wanted to answer the questions: if we present different categories of 
-visual stimuli to a subject, would each visual stimulus category evoke the 
-same category-specific pattern of response in the ventral object vision 
-pathway? Could we distinguish individual categories from the 
-patterns of response evoked? \\
+In Haxby et al's study, \emph{Distributed and Overlapping Representations of Faces
+and Objects in Ventral Temporal Cortex}\cite{objectrec}, researchers collected data 
+from six subjects, including five females and one male. 
+Different categories of pictures were presented to subjects as visual stimuli.
+The categories are faces, cats, chairs, shoes, bottles, tools, houses, 
+and a control category of phase-scrambled images.
+The study aimed to answer the following questions: if we present 
+different categories of visual stimuli to a subject, will category-specific response be 
+evoked in the ventral cortex? \\
 
-Each subject were placed into the functional 
-magnetic resonance imaging (fMRI) for 12 times thus generating 12 time series 
-data. One complete experiment run lasted 300s. It began with 12s of rest, followed by 8 stimulus blocks of 24s duration, one for each category of visual stimuli. There were 12s intervals of rest between any two stimulus blocks, and 
-the whole procedure ended with another 12s of rest. 
-During each stimulus blocks, each picture stimulus were presented for 0.5s 
-followed by an interstimulus interval for 1.5 ms, thus presented a total of 
-12 stimuli during 
-each stimulus block and 96 stimuli in a complete experiment run.\\
+Each subject was placed into a functional magnetic resonance imaging 
+(fMRI) facility for 12 times. One complete experiment run lasted 300s. It began 
+with 12s of rest, followed by 8 stimulus blocks of 24s duration, one for 
+each category of visual stimuli. There were 12s intervals of rest between 
+every two blocks, and the whole procedure ended with another 12s of rest. 
+Each picture stimulus were presented for 0.5s followed by an inter-stimulus 
+interval of 1.5ms. 12 stimuli were presented during each stimulus 
+block, and a total of 96 stimuli in a complete experiment run.\\
 
-In Haxby et al's study, the data collected for each subject were split into two 
-runs: odd runs and even runs. Correlation were used as indices of response similarity, and from 
-analyzing within-category correlation and between-category correlation, the 
-result suggested that category-specific patterns of response were distributed 
-and overlapping. The result brought a new question of whether each stimulus 
-category evoked a distinct pattern of response in cortex that responded 
-maximally to other categories. To test whether the patterns of non-maximal 
-responses carry category-related information, voxels that responded maximally 
-to either category were excluded from calculation of correlations. It turned 
-out that removal of maximally responded voxels from correlation calculation 
-barely diminished the accuracy of identification. The research reached a 
-conclusion that the pattern of large and small responses, not just the location 
-of large responses, carry category-related information, and small responses 
+In the study, the data collected for each subject were split into two 
+runs: odd runs and even runs. Correlation was used as the indication of 
+response similarity. Results from analyzing within-category and 
+between-category correlations suggest that a lot of response patterns 
+are overlapping. In the overlaps, there are parts of the cortex that respond 
+more to a certain stimuli than others. The study defines these responses as 
+maximal response. In order to gain more insights from the non-overlapping 
+parts of the responses, the study tests whether the patterns of non-maximal 
+responses carry category-related information. Voxels that responded maximally 
+to were excluded from this calculation of correlations. The results show that the 
+removal of maximally responsive voxels from correlation calculations 
+barely diminishes the accuracy of identification. The study concludes 
+that both the pattern of large and small responses and the location 
+of large responses carry category-related information; and small responses 
 are an integral part of the representation.\\
 
 \section{Data}
@@ -104,76 +102,66 @@ pre-processing and confound files, and visualization of the brain (nii files).\\
 
 \section{Methods}
 
-Within each subject, for each of the twelve runs, we have eight condition
-files corresponding to each of the eight objects in our study. Each
-condition file consists of time points of when the corresponding object 
-showed up in the run. We run the event2neural() function on this condition
-file, and it returns an array of 121 values of zero or one. These indicate
-time intervals at which the subject was looking at that particular object.
-We then used the convolve function within numpy to convolve the bold signal
-for this object onto all the specified time intervals. After repeating this
-for each object, we were able to create regressors and build our design
-matrix. Lastly, we fit a linear model to the predicted BOLD signal we got
+For each subject, there are eight condition files corresponding 
+to each of the eight objects for each of the twelve runs. Each
+condition file consists of time points of when the object was presented 
+during the run. We started our analysis with subject 1, where we first wrote 
+helper functions to identify and remove outliers.  Then we ran 
+the event2neural function on subject 1's condition files, which returned an 
+array of 121 zeros or ones. These values indicate
+time intervals at which the subject was looking at the object.
+We then used the numpy convolve function to convolve the BOLD signal 
+onto the specified time intervals needed. After repeating this process 
+for all objects, we created regressors and built our design matrix. 
+Lastly, we fitted a linear model to the predicted BOLD signals 
 from convolution, and gathered a mean RSS value. We then applied the contrast
-function to see whether a particular object showed a pattern in the brain.
-Unfortunately, the voxels gave off images that were too defined, making it hard
-to see any patterns. Thus, we applied a Gaussian filter to smooth over the
-values and blur the images. This led to us seeing patterns a bit better.
-This is explained below. \\
+function to investigate whether each object shows a response pattern in the brain.
+Unfortunately, initial images produced did not show sufficient contrast, 
+making it difficult to observe patterns. Thus, we used smoothing techniques to 
+produce better images. For smoothing, we applied Gaussian filters over an
+array of voxel intensity values to generate images that are more appealing
+to the human eye and easier to identify different parts of the brain.
+The downside of this technique is that the new patterns identified can
+potentially be false since the data is transformed. We then repeated our 
+data analysis with the rest of the subjects.
+ \\
 
-With the rest of the unprocessed data, what we plan to do is to repeat our
-cleaning data process. This involves removing outliers in the intensity data,
-smoothing the voxel data, and reducing the dimensionality of the data. In
-terms of smoothing the data, the following steps were taken to do so:
-First, grab all the voxel intensity values and store it in an array.
-Then, iterate through each voxel intensity value, then apply Gaussian filter
-to that point. This produces a smooth voxel while increasing the blur, which
-makes it easier to see patterns or trends in the brain. This method is
-appealing to the human eye, however the caveat is that the new patterns
-a person might see could actually be false signals since the data was
-transformed. Finally, the method we are considering to make use of for
-dimension reduction is Principal Component Analysis (PCA). PCA will
-essentially extract features from the original data, control variance in the
-data, and convey more information with less dimensions. Finally, in order to
-validate our models and data analysis, we'll be looking at mean square error
-and classification rate as metrics to judge how well our model performs. \\
+We used various statistical methods and tests in our analysis. First,
+we built a general linear model to provide estimates for the magnitude of
+the response for respective stimulus. Then we applied this model to obtain
+beta values for different objects. We then ran correlation analysis on the
+beta values, which is further explained below. Moreover, the BOLD signal 
+data are time series, and we performed appropriate analysis such as 
+an object correlation table for each subject and an autoregressive integrated
+moving average model to predict and fit the BOLD signal responses. 
+Finally, in order to validate our models and data analysis, we looked 
+at mean squared errors to judge how well our model performs. \\
 
-In terms of what statistical methods we will employ on the data, below is a
-general description of the statistical method and its purpose, specifically 
-with our data. Generalized linear models can be utilized to build other linear
-models off the data, with different assumptions behind the data. For example,
-we could assume the error distribution models something other than a normal
-distribution. ANOVA tests if different groups have the same mean, while
-Kruskal-Wallis Test tests the hypothesis of whether or not each group 
-comes from the same distribution. This will be applied to see if the fMRI data
-of different objects are statistically significant. One other subject that
-would be interesting to look at is time series analysis. The BOLD signals 
-constitute time series data; thus, some methods that can be used include
-forecasting, ARIMA or GARCH fitting, and specifying P, D, and Q. Finally,
-one investigation we are going to look into is to determine whether or not
-the BOLD signals are normally distributed. \\
-
-Some other analysis we could consider, given time, would be to try using
-machine learning to see if we can build models that can predict objects seen
-by the subject. Some models that could solve this problem include random
-forests and boosting. Until then, our main focus will be on the previous
-statistical methods we described earlier. \\
+For correlation analysis, we divided all the runs into two groups (odd and even)
+, and we aggregated all the results from each object within the group. Then, 
+we computed the correlations between the average beta values of each object 
+of each group and all objects in the opposite group. Take all the even runs 
+where the subject was shown an image of a face as an example. We take 
+the compiled array of beta values, and found the correlation between this 
+array and that generated from all the odd runs where the subject was shown 
+the images of a face, bottle, cat, chair, house, scissors, scrambledpix, and 
+shoe respectively. This gives us 8 correlation values. By repeating the same 
+procedures with all the other objects, we created a 8x8 correlation matrix. \\
 
 \section{Results}
 
-After downloading the data from open fMRI database, the data for 
-sub001 run001 was used to perform initial analysis to see if we can identify 
-specific brain region for recognizing specific object like house. 
+Since we started our analysis with subject 1, run001, we will first display those
+results. We performed initial analysis to attempt to identify specific brain region 
+for recognizing specific object, such as face or house. 
 
-First, functions from homework 2 were used to identify outliers and remove 
-them. 
+Here are the outliers we identified and removed. \\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=90mm]{Volume_RMS_Difference_Outliers_sub001_run001.png}
 \caption{Remove Outliers}
 \end{figure}
 
-Secondly, we used envents2neural function to generate task time course. 
+Then, we generated task time course with the event2neural function.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=90mm]{Task_time_course_sub001_run001.png}
@@ -182,7 +170,7 @@ Secondly, we used envents2neural function to generate task time course.
 
 \pagebreak 
 
-Thirdly, we performed convolusion to generate predicted BOLD signals for this 
+Afterwards, we performed convolution to generate predicted BOLD signals for this 
 dataset.
 \begin{figure}[h!]
 \centering
@@ -190,22 +178,49 @@ dataset.
 \caption{Stimulation Bold}
 \end{figure}
 
-Finally, these convolved results for each objects were used as parameters in 
+These convolved results for each objects were used as parameters in 
 our design matrix for linear regression. To avoid the drifting problem, we also 
 included two drift parameters in the design matrix. The final design matrix was 
 arranged as followed: bottle, cat, chair, face, house, scissors, scrambledpix, 
-shoe, drift1, drift2, average(all ones)
+shoe, drift1, drift2, average(all ones). 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=90mm]{design_matrix_sub001_run001.png}
 \caption{Design Matrix}
 \end{figure}
 
+As mentioned above, we ran correlation analysis on the beta values.
+None of the correlation values are perfectly 1. The diagonal values 
+are correlations between each object with their respective odd or 
+even runs (within-category correlations). All within-category correlation 
+values are larger than 0.6. For bottle, cat, face, house, scrambledpix, 
+and shoe, the respective within-category correlations are higher than 
+all of that object?s between-category correlations with other objects. 
+For chair and scissors, the within-category correlations are not higher 
+than all of their between-category correlations.
+
 \section{Discussion}
 
+Most of the within-category correlations we found are fairly similar than the paper?s. 
+Some of the values from our analysis are higher than the paper?s, which could be 
+due to the fact that we only analyzed correlations between runs for one subject, 
+while the original research paper studied all subjects. It would make sense that 
+correlations are higher when only analyzing brain activity from one brain. \\
+
+Correlations between different objects (between-category correlations) seem 
+fairly random, which also seem to be in line with the original paper?s finding. 
+We observe that our between-category correlation values also tend to be higher 
+than those from the paper. \\
+
+To test the reproducibility of the study, we also redid our correlation analysis 
+after excluding the maximally-responsive voxels. With the exception of some 
+within-category correlations, most correlation values across all categories dropped 
+after we removed the maximally-responsive voxels. This might be an indication 
+that most of the highly correlated areas tend to have higher responses. \\
+
 There are a lot of problems that came up during our analysis. To begin with, 
-since most of us have limited neuroscience knowledge, it was very difficult to 
-merely understand the study and the data itself. The research paper of the 
+since most of us have limited neuroscience knowledge, it was very difficult 
+just to understand the study and the data itself. The research paper of the 
 study uses specific and technical terms that make it hard to comprehend. 
 More time was spent at the earlier stages of this project rereading the 
 original paper and exploring the data folders than expected, which slowed down 
@@ -223,7 +238,7 @@ performed. In addition, we used smoothing techniques to create clearer
 and more meaningful images. \\
 
 Furthermore, we faced problems recently that are yet to be resolved. Since 
-subjects? heads often slowly move to a certain direction during fMRI scans, 
+subjects' heads often slowly move to a certain direction during fMRI scans, 
 drifting of time series graph of BOLD signals is observed. We are planning 
 to apply time series analysis modeling techniques, which will hopefully take 
 the drifting into account and improve the accuracy of our models. Also, the 
