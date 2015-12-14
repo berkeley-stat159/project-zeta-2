@@ -1,6 +1,6 @@
-.PHONY: all clean coverage test data validate analysis report
+.PHONY: all clean coverage test data validate analysis report data2
 
-all: clean coverage test data validate analysis report
+all: clean coverage test data validate analysis report data2
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
@@ -22,7 +22,7 @@ data:
 	# rename folder: ds105 -> ds105_raw
 	mv ds105 ds105_old
 	# Move to Data
-	mv ds105_old /data
+	mv ds105_old ./data
 	# download preprocessed data
 	wget https://nipy.bic.berkeley.edu/rcsds/ds105_mnifunc.tar
 	# unzip preprocessed data
@@ -30,7 +30,7 @@ data:
 	# rename folder:
 	mv ds105 ds105_new
 	# Move to data
-	mv ds105_new /data
+	mv ds105_new ./data
    
 validate:
 	python data/data.py
