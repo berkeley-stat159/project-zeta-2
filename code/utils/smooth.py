@@ -15,7 +15,7 @@ def smooth (img_dict):
 
     """
     result = {}
-    for key, img in img_dict.iteritems():
+    for key, img in img_dict.items():
         result[key] = snd.gaussian_filter(img, 1)
 
     return result
