@@ -475,8 +475,8 @@ fig = plt.figure(figsize=(10, 24))
 for plot_num in range(8):
     i = plot_num -1
     ax = plt.subplot(8, 1, plot_num, frameon=False)
-    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='royalblue')
-    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='deepskyblue')
+    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='darkgoldenrod')
+    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='tan')
     # add some label:
     ax.set_ylabel("Correlation")
     ax.set_title("%s" % object_list[i])
@@ -496,8 +496,8 @@ width = 0.35
 fig = plt.figure(figsize=(12, 5))
 for i in range(8):
     ax = plt.subplot(111, frameon=False)
-    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='royalblue')
-    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='deepskyblue')
+    bar_plot1 = ax.bar(ind, table_result_3d[i, :], width, color='darkgoldenrod')
+    bar_plot2 = ax.bar(ind+width, non_max_table_result_for3d[i, :], width, color='tan')
     # add some label:
     ax.set_ylabel("Correlation")
     ax.set_title("%s" % object_list[i])
