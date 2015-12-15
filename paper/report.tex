@@ -209,6 +209,54 @@ than all of their between-category correlations.
 \caption{3D Correlation Excluding Maximally Responding Voxels for Subject 1}                                    
 \end{figure}
 
+In the correlation analysis, some questions we wanted to answer were
+would the time series correlation tables be similar to ones produced from
+the linear regression process if we looked at the raw nii data, how would
+the correlations differ between the same and different objects, and was the
+experiment designed in such a way so that correlations are the approximately
+the same with different runs and subjects. The first step in the time series
+analysis was retrieving a particular subset of the brain from the raw data.
+This was done by getting the entire 4-D data, applying a mask on the 4-D data
+to remove any noises, and using the same subsetted brain as the linear
+regression process. Then, we averaged the subsetted brain into an array that
+represents the BOLD signal responses from the beginning to the end of each run.
+The array has a length of 121, which is the same as the length of each run.
+Next, based on the condition files of each subject and run, we segmented the
+array and created a time series array for each of the eight objects. The
+condition files specified when an object was shown and for how long; thus,
+giving us a particular range to subset precisely. Finally, we grouped the
+object time series arrays into either even or odd runs. This allows us to
+compare averaged even and odd object runs to one another and generate
+Pearson Correlation coefficients. At the end of this analysis, six correlation
+tables were generated.
+
+On the time-side analysis, we were able to fit autoregressive integrated
+moving average (ARIMA) models to the BOLD signal responses. This allowed us to
+see how good of a fit a time series model is compared to the raw data and 
+predict BOLD signal responses without having to know an object a subject is 
+looking at. To see if we could initally fit a time-side model, we looked at
+subject one run one's data. An autocorrelation and partial autocorrelation 
+plot of the run's raw BOLD signals was generated. 
+
+There is a significant lag cut-off after lag two in the partial autocorrelation plot, 
+which means the autoregressive order should be at least two. The cut-off in 
+the autocorrelation plot was at lag four, indiciating the moving average 
+order should be four. To ensure these are the right orders for the ARIMA model, 
+an auto.Arima() function was used to automate the parameter search process. 
+In subject one run one, the best ARIMA model was ARIMA(2, 0, 0). 
+Upon fitting the model, the residual's autocorrelation and partial 
+autocorrelation plot were looked at to ensure a goodness of fit. 
+
+In both plots, the significant lag cuts off after lag one;
+thus, showing that the residuals have no serial correlation. In addition, the
+Ljung-Box test was used to validate this assumption. It has a null hypothesis
+that the residuals are independently distributed and uncorrelated, with an
+altnerative hypothesis that they are correlated. The p-value came out to be
+0.6071, so we accept the null. One trend that came up was that there were
+no periods of volatility in the residuals plot; thus, we could not look into
+an ARIMA-GARCH hybrid model.
+
+
 \section{Discussion}
 
 Most of the within-category correlations we found are fairly similar than the paper?s. 
@@ -227,6 +275,42 @@ after excluding the maximally-responsive voxels. With the exception of some
 within-category correlations, most correlation values across all categories dropped 
 after we removed the maximally-responsive voxels. This might be an indication 
 that most of the highly correlated areas tend to have higher responses. \\
+
+Looking at the correlation tables, the first thing that we noticed was that
+the time series correlation tables were much more different from the linear
+regression correlation tables. Even though the same subset of the brain was 
+used, the time series tables exclusively had negative correlations, higher 
+correlations with dissimilar objects against same objects, and even negative
+correlations with the same objects. \\
+
+These differences could have come from how
+the two processes were executed. For example, the linear regression process
+involved convolving the data and transforming the data with beta values, 
+whereas the time series analysis only looked at the raw data. Thus, this is
+the most likely reason as to why the tables differed. The second thing the time
+series correlation tables had was that across the six subjects, no two subjects
+had similar correlation results. This confirms one of our hypothesis that 
+the brain is a complex structure that will never give consistent results even
+with a well designed experiment. What this means is that the BOLD signal
+responses are not exactly 100\% comparable and it should be expected to have
+contrasting correlation coefficients. One last point to bring up is that
+the BOLD signals were not consistent across a subject's runs. In one run, a
+cat BOLD signal would come out at an intensity of 10,800 and then in another,
+it would come out to 10,500. One question we wanted to answer was given the
+objects, can we predict the BOLD signal responses? Given that an object's
+BOLD signal was never the same, this showed us that we couldn't answer that
+particular question. Thus, we were unable to conclude anything regarding
+predicting a BOLD signal given the objects. \\
+
+In terms of time series analysis, now that there is a good model 
+for one particular run, we can go about
+answering the original questions we had with time-side analysis. When we 
+plotted the actual to the fitted values, we see that the ARIMA model was 
+able to capture the actual values very well. This allows us to get into
+forecasting and predicting future responses. However, one limiation with
+the python StatsModel package is that there are no forecasting methods
+available. Thus, no further progress could be done unless R was available
+as a tool. \\
 
 There are a lot of problems that came up during our analysis. To begin with, 
 since most of us have limited neuroscience knowledge, it was very difficult 
