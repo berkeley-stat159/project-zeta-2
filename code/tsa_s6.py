@@ -333,25 +333,59 @@ r12scissor = arr12[64:74]
 r12chair = arr12[50:60]
 r12face = arr12[6:16]
 
-evenHouse = (np.array(r2house) + np.array(r4house) + np.array(r6house) + np.array(r8house) + np.array(r10house) + np.array(r12house)) / 6
-oddHouse = (np.array(r1house) + np.array(r3house) + np.array(r5house) + np.array(r7house) + np.array(r9house) + np.array(r11house)) / 6
-evenScram = (np.array(r2scram) +  np.array(r4scram) + np.array(r6scram) + np.array(r8scram) + np.array(r10scram) +  np.array(r12scram)) / 6
-oddScram = (np.array(r1scram) + np.array(r3scram) + np.array(r5scram) + np.array(r7scram) + np.array(r9scram) + np.array(r11scram)) / 6
-evenCat = (np.array(r2cat) + np.array(r4cat) + np.array(r6cat) + np.array(r8cat) + np.array(r10cat) + np.array(r12cat)) / 6
-oddCat = (np.array(r1cat) + np.array(r3cat) + np.array(r5cat) + np.array(r7cat) + np.array(r9cat) + np.array(r11cat)) / 6
-evenShoe = (np.array(r2shoe) + np.array(r4shoe) + np.array(r6shoe) + np.array(r8shoe) + np.array(r10shoe) + np.array(r12shoe)) / 6
-oddShoe = (np.array(r1shoe) + np.array(r3shoe) + np.array(r5shoe) + np.array(r7shoe) + np.array(r9shoe) + np.array(r11shoe)) / 6
-evenBottle = (np.array(r2bottle) + np.array(r4bottle) + np.array(r6bottle) + np.array(r8bottle) + np.array(r10bottle) + np.array(r12bottle)) / 6
-oddBottle = (np.array(r1bottle) + np.array(r3bottle) + np.array(r5bottle) + np.array(r7bottle) + np.array(r9bottle) + np.array(r11bottle)) / 6
-evenScissor = (np.array(r2scissor) + np.array(r4scissor) + np.array(r6scissor) + np.array(r8scissor) + np.array(r10scissor) + np.array(r12scissor)) / 6
-oddScissor = (np.array(r1scissor) + np.array(r3scissor) + np.array(r5scissor) + np.array(r7scissor) + np.array(r9scissor) + np.array(r11scissor)) / 6
-evenChair = (np.array(r2chair) + np.array(r4chair) + np.array(r6chair) + np.array(r8chair) + np.array(r10chair) + np.array(r12chair)) / 6
-oddChair = (np.array(r1chair) + np.array(r3chair) + np.array(r5chair) + np.array(r7chair) + np.array(r9chair) + np.array(r11chair)) / 6
-evenFace = (np.array(r2face) + np.array(r4face) + np.array(r6face) + np.array(r8face) + np.array(r10face) + np.array(r12face)) / 6
-oddFace = (np.array(r1face) + np.array(r3face) + np.array(r5face) + np.array(r7face) + np.array(r9face) + np.array(r11face)) / 6
+evenHouse = (np.array(r2house) + np.array(r4house) + 
+			 np.array(r6house) + np.array(r8house) + 
+			 np.array(r10house) + np.array(r12house)) / 6
+oddHouse = (np.array(r1house) + np.array(r3house) + 
+			np.array(r5house) + np.array(r7house) + 
+			np.array(r9house) + np.array(r11house)) / 6
+evenScram = (np.array(r2scram) +  np.array(r4scram) + 
+			 np.array(r6scram) + np.array(r8scram) + 
+			 np.array(r10scram) +  np.array(r12scram)) / 6
+oddScram = (np.array(r1scram) + np.array(r3scram) + 
+			np.array(r5scram) + np.array(r7scram) + 
+			np.array(r9scram) + np.array(r11scram)) / 6
+evenCat = (np.array(r2cat) + np.array(r4cat) + 
+		   np.array(r6cat) + np.array(r8cat) + 
+		   np.array(r10cat) + np.array(r12cat)) / 6
+oddCat = (np.array(r1cat) + np.array(r3cat) + 
+		  np.array(r5cat) + np.array(r7cat) + 
+		  np.array(r9cat) + np.array(r11cat)) / 6
+evenShoe = (np.array(r2shoe) + np.array(r4shoe) +
+		    np.array(r6shoe) + np.array(r8shoe) + 
+		    np.array(r10shoe) + np.array(r12shoe)) / 6
+oddShoe = (np.array(r1shoe) + np.array(r3shoe) + 
+		   np.array(r5shoe) + np.array(r7shoe) + 
+		   np.array(r9shoe) + np.array(r11shoe)) / 6
+evenBottle = (np.array(r2bottle) + np.array(r4bottle) + 
+			  np.array(r6bottle) + np.array(r8bottle) + 
+			  np.array(r10bottle) + np.array(r12bottle)) / 6
+oddBottle = (np.array(r1bottle) + np.array(r3bottle) + 
+			 np.array(r5bottle) + np.array(r7bottle) + 
+			 np.array(r9bottle) + np.array(r11bottle)) / 6
+evenScissor = (np.array(r2scissor) + np.array(r4scissor) + 
+			   np.array(r6scissor) + np.array(r8scissor) + 
+			   np.array(r10scissor) + np.array(r12scissor)) / 6
+oddScissor = (np.array(r1scissor) + np.array(r3scissor) + 
+			  np.array(r5scissor) + np.array(r7scissor) + 
+			  np.array(r9scissor) + np.array(r11scissor)) / 6
+evenChair = (np.array(r2chair) + np.array(r4chair) + 
+			 np.array(r6chair) + np.array(r8chair) + 
+			 np.array(r10chair) + np.array(r12chair)) / 6
+oddChair = (np.array(r1chair) + np.array(r3chair) + 
+			np.array(r5chair) + np.array(r7chair) + 
+			np.array(r9chair) + np.array(r11chair)) / 6
+evenFace = (np.array(r2face) + np.array(r4face) + 
+			np.array(r6face) + np.array(r8face) + 
+			np.array(r10face) + np.array(r12face)) / 6
+oddFace = (np.array(r1face) + np.array(r3face) + 
+		   np.array(r5face) + np.array(r7face) + 
+		   np.array(r9face) + np.array(r11face)) / 6
 
-evenRun = [evenBottle, evenCat, evenChair, evenFace, evenHouse, evenScissor, evenScram, evenShoe]
-oddRun = [oddBottle, oddCat, oddChair, oddFace, oddHouse, oddScissor, oddScram, oddShoe]
+evenRun = [evenBottle, evenCat, evenChair, evenFace,
+		   evenHouse, evenScissor, evenScram, evenShoe]
+oddRun = [oddBottle, oddCat, oddChair, oddFace, 
+		  oddHouse, oddScissor, oddScram, oddShoe]
 
 all_results = [0.0] * 64
 all_results = np.reshape(all_results, (8, 8))
@@ -359,15 +393,18 @@ for i in range(8):
 	for j in range(8):
 		all_results[i, j] = np.corrcoef(evenRun[i], oddRun[j])[0, 1]
 
-object_list = ["bottle", "cat", "chair", "face", "house", "scissor", "scram", "shoe"]
+object_list = ["bottle", "cat", "chair", "face",
+			   "house", "scissor", "scram", "shoe"]
 
 fig = plt.figure(figsize=(8, 4))
 plt.subplot(111, frameon=False, xticks=[], yticks=[])
-table = plt.table(cellText=all_results.round(4), colLabels=object_list, rowLabels=object_list, loc='center', cellLoc='center')
+table = plt.table(cellText=all_results.round(4), colLabels=object_list,
+				  rowLabels=object_list, loc='center', cellLoc='center')
 plt.subplots_adjust(left=0.3, bottom=0, top=0.95)
 fig.text(0.55, 0.75, 'Odd runs', ha='left', fontsize=12)
 fig.text(0.05, 0.52, 'Even runs', ha='left', rotation=90, fontsize=12)
-fig.text(0.3, 0.85, "Correlation of TSA brain images of %s" % subid, weight='bold')
+fig.text(0.3, 0.85, "Correlation of TSA brain images of %s" % subid,
+		 weight='bold')
 table.scale(1.2, 1.2)
 plt.savefig(figure_path + "subtracted_correlation_table_%s.png" % subid)
 plt.close()
