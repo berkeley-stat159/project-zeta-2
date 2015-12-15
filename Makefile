@@ -1,40 +1,46 @@
-.PHONY: all clean coverage test data validate analysis report
+.PHONY: all structure data validate analysis figures 
+		report clean test verbose coverage
 
 all: clean coverage test data validate analysis report
+	 cd code && make all
+	 cd data && make all
+	 cd paper && make all
+	 cd proposal && make all
+	 cd slides && make all
+
+structure:
+	cd data && make structure
+
+data:
+	cd data && make data
+   
+validate:
+	cd data && make validate
+
+analysis:
+	cd code && make analysis
+	cd code && make timeseries
+
+figures: 
+	cd paper && make figures
+
+report:
+	pdflatex -interaction=nonstopmode report.tex
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
-
-coverage:
-	nosetests code/utils data --with-coverage --cover-package=data  --cover-package=utils
+	cd paper && make clean
+	cd proposal && make clean
+	cd slides && make clean
 
 test:
 	nosetests code/utils/tests data
+	cd code && make test
 
 verbose:
 	nosetests -v code/utils data
+	cd code && nosetests -v utils
 
-data:
-	# download raw data from openfmir database
-	wget http://openfmri.s3.amazonaws.com/tarballs/ds105_raw.tgz
-	# unzip raw data
-	tar -zxvf ./ds105_raw.tgz
-	# rename folder: ds105 -> ds105_raw
-	mv ds105 ds105_old
-	# Move to Data
-	mv ds105_old ./data
-	# download preprocessed data
-	wget https://nipy.bic.berkeley.edu/rcsds/ds105_mnifunc.tar
-	# unzip preprocessed data
-	tar -zxvf ./ds105_mnifunc.tar
-	# rename folder:
-	mv ds105 ds105_new
-	# Move to data
-	mv ds105_new ./data
-   
-validate:
-	python data/data.py
-
-analysis:
-
-report:
+coverage:
+	nosetests code/utils data --with-coverage --cover-package=data  --cover-package=utils
+	cd code && make coverage
