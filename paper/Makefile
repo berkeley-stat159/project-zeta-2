@@ -64,11 +64,11 @@ figures:
 	cp ../code/images/sub001_run001_residFit.png ./
 
 all:
+	figures	
 	pdflatex $(TITLE).tex
 	bibtex $(TITLE)
 	pdflatex $(TITLE).tex
 	pdflatex $(TITLE).tex
-	figures
 
 
 clean:
