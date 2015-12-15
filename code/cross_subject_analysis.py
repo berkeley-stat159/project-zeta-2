@@ -229,7 +229,7 @@ fig.text(0.55, 0.75, 'Odd runs', ha='left', fontsize=12)
 fig.text(0.05, 0.52, 'Even runs', ha='left', rotation=90, fontsize=12)
 fig.text(0.2, 0.85, "3D Non-Max Total correlation between odd runs and even runs", weight='bold')
 table.scale(1.2, 1.2)
-plt.savefig(figure_path + "3d_total_correlation_table_non_max_%s.png")
+plt.savefig(figure_path + "3d_total_correlation_table_non_max.png")
 
 # calculate standard deviation across subjects:
 total_std_non_max_for3d = np.std(total_array_non_max_for3d, axis=0)
