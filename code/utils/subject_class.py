@@ -9,7 +9,6 @@ import nibabel as nib
 class subject(object):
     """try to organize data based on subject ex sub001"""
     # deal with path problem
-
     def __init__(self, sub):
         # subject info ex: 'sub001'
         self.sub_id = sub
