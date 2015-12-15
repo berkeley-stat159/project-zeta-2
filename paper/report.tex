@@ -230,6 +230,13 @@ compare averaged even and odd object runs to one another and generate
 Pearson Correlation coefficients. At the end of this analysis, six correlation
 tables were generated.
 
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_corrFunc.png}                   
+\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1}                                    
+\end{figure}
+
+
 On the time-side analysis, we were able to fit autoregressive integrated
 moving average (ARIMA) models to the BOLD signal responses. This allowed us to
 see how good of a fit a time series model is compared to the raw data and 
@@ -247,6 +254,12 @@ In subject one run one, the best ARIMA model was ARIMA(2, 0, 0).
 Upon fitting the model, the residual's autocorrelation and partial 
 autocorrelation plot were looked at to ensure a goodness of fit. 
 
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_residcorrFunc.png}                   
+\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1 Residuals}                                    
+\end{figure}
+
 In both plots, the significant lag cuts off after lag one;
 thus, showing that the residuals have no serial correlation. In addition, the
 Ljung-Box test was used to validate this assumption. It has a null hypothesis
@@ -255,6 +268,18 @@ altnerative hypothesis that they are correlated. The p-value came out to be
 0.6071, so we accept the null. One trend that came up was that there were
 no periods of volatility in the residuals plot; thus, we could not look into
 an ARIMA-GARCH hybrid model.
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_residFit.png}                   
+\caption{Residuals of ARIMA Model}                                    
+\end{figure}
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{AFTS.png}                   
+\caption{Actual vs Fitted Values of Subject 1 Run 1}                                    
+\end{figure}
 
 
 \section{Discussion}
@@ -282,6 +307,19 @@ regression correlation tables. Even though the same subset of the brain was
 used, the time series tables exclusively had negative correlations, higher 
 correlations with dissimilar objects against same objects, and even negative
 correlations with the same objects. \\
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{subtracted_correlation_table_sub001.png}                   
+\caption{3D Correlation Time Series Table for Subject 1}                                    
+\end{figure}
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{subtracted_correlation_table_sub003.png}                   
+\caption{3D Correlation Time Series Table for Subject 3}                                    
+\end{figure}
+
 
 These differences could have come from how
 the two processes were executed. For example, the linear regression process

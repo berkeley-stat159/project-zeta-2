@@ -49,6 +49,16 @@ figures:
 	cp ../code/images/Task_time_course_sub001_run001.png ./
 	cp ../code/images/Try_3D_correlation_sub001.png ./
 	cp ../code/images/Volume_RMS_Difference_Outliers_sub001_run001.png ./
+	cp ../code/images/subtracted_correlation_table_sub001.png ./
+	cp ../code/images/subtracted_correlation_table_sub002.png ./
+	cp ../code/images/subtracted_correlation_table_sub003.png ./
+	cp ../code/images/subtracted_correlation_table_sub004.png ./
+	cp ../code/images/subtracted_correlation_table_sub005.png ./
+	cp ../code/images/subtracted_correlation_table_sub006.png ./
+	cp ../code/images/AFTS.png ./
+	cp ../code/images/sub001_run001_corrFunc.png ./
+	cp ../code/images/sub001_run001_residcorrFunc.png ./
+	cp ../code/images/sub001_run001_residFit.png ./
 
 all:
 	pdflatex $(TITLE).tex
