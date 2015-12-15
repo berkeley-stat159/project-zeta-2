@@ -23,7 +23,7 @@ figures:
 	cp ../code/images/3d_total_correlation_bar_both_shoe.png ./
 	cp ../code/images/3d_total_correlation_bar_both.png ./
 	cp ../code/images/3d_total_correlation_table_non_max.png ./
-	cp ../code/images/3d_total_correlation_table.png
+	cp ../code/images/3d_total_correlation_table.png ./
 	cp ../code/images/betas_for_sub001_run001_house.png ./
 	cp ../code/images/correlation_table_sub001.png ./
 	cp ../code/images/design_matrix_sub001_run001.png ./
