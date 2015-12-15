@@ -354,31 +354,12 @@ There are a lot of problems that came up during our analysis. To begin with,
 since most of us have limited neuroscience knowledge, it was very difficult 
 just to understand the study and the data itself. The research paper of the 
 study uses specific and technical terms that make it hard to comprehend. 
-More time was spent at the earlier stages of this project rereading the 
+More time was spent at the earlier stages rereading the 
 original paper and exploring the data folders than expected, which slowed down 
-our progress for analysis. Therefore, we only had time to investigate one 
-subject and one run so far. Now that we have a better understanding of the 
-study and the data, we hope to repeat our analysis on the remaining subjects.\\
-
-After we understood which part of the data to use, we started our 
-exploratory data analysis. There is a lot of noise within the original dataset, 
-causing insignificant p-values for test statistics, such as t-tests. Moreover, 
-the noise in the original dataset produces low-resolution brain images, 
-which are not meaningful for our further analysis. Pre-processing of data, 
-including the removal of outliers using techniques from homework 2, was 
-performed. In addition, we used smoothing techniques to create clearer 
-and more meaningful images. \\
-
-Furthermore, we faced problems recently that are yet to be resolved. Since 
-subjects' heads often slowly move to a certain direction during fMRI scans, 
-drifting of time series graph of BOLD signals is observed. We are planning 
-to apply time series analysis modeling techniques, which will hopefully take 
-the drifting into account and improve the accuracy of our models. Also, the 
-BOLD signals change differs from subject to subject, making it difficult to 
-compare signals from the same run between subjects. We would need to 
-find a statistical valid way to standardize the BOLD signals, so we could 
-analyze how BOLD signals under different conditions are related to each 
-other across subjects. \\
+our progress for analysis. Moreover, the values from correlation analysis 
+did not come out as clean as we hoped, which also set our progress back. 
+We did not end up have time to apply machine learning techniques for 
+predictions as we originally splanned to. \\
 
 \bibliography{project}
 
