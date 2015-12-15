@@ -13,10 +13,12 @@ file_path = os.path.join(base_path, "code", "txt", "")
 
 
 sub1 = sc.subject("sub001")
-sub1_neural = neural.get_object_neural(sub1.sub_id ,sub1.conditions, sub1.TR, sub1.BOLD_shape[-1])
+sub1_neural = neural.get_object_neural(sub1.sub_id ,sub1.conditions,
+									   sub1.TR, sub1.BOLD_shape[-1])
 tr_times = np.arange(0, 30, sub1.TR)
 hrf_at_trs = convol.hrf(tr_times)
-object_list = ["bottle", "cat", "chair", "face", "house", "scissors", "scrambledpix", "shoe"]
+object_list = ["bottle", "cat", "chair", "face", "house", "scissors",
+               "scrambledpix", "shoe"]
 sub1_convolved = convol.get_all_convolved(sub1_neural, hrf_at_trs, file_path)
 
 s1run1 = np.array([0.0] * 121)
@@ -55,8 +57,9 @@ plt.savefig("sub001_run001_residFit.png")
 plt.clf()
 plt.close()
 
-# print("P-Value for independence of residuals. If greater than 0.05, model is correct")
-# print(sm.stats.diagnostic.acorr_ljungbox(s1r1_arimaFit.resid, lags = 20))[1]
+# print("P-Value for independence of residuals. If greater than 0.05, model \
+# is correct") print(sm.stats.diagnostic.acorr_ljungbox(s1r1_arimaFit.resid, \
+# lags = 20))[1]
 
 fig = plt.figure(figsize = (12,8))
 ax1 = fig.add_subplot(211)
