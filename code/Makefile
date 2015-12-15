@@ -44,3 +44,6 @@ timeseries:
 	python tsa_s5.py
 	python tsa_s6.py
 	
+all:
+	test coverage analysis regression correlation timeseries
+	

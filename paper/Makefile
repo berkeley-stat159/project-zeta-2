@@ -65,6 +65,7 @@ all:
 	bibtex $(TITLE)
 	pdflatex $(TITLE).tex
 	pdflatex $(TITLE).tex
+	figures
 
 
 clean:

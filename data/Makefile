@@ -22,10 +22,4 @@ data:
 validate:
 	python data.py
 
-trytry:
-	wget --no-check-certificate https://nipy.bic.berkeley.edu/rcsds/ds105_mnifunc.tar
-	tar -xvzf ./ds105_mnifunc.tar
-	mv ds105 ds105_new
-	wget http://www.jarrodmillman.com/rcsds/_downloads/actc.txt
-	mv actc.txt ../code/txt/
-
+all: structure data validate
