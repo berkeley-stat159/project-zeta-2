@@ -5,8 +5,7 @@
 \usepackage{graphicx}
 
 \title{\textbf{Team Zeta Project Report}\\
-Visual Object Prediction by Machine Learning:\\ 
-Object Category Approximation Using Non-Maximal Voxels}
+Linear Modeling and Time Series Analysis of Visual Pattern Recognition}\\
 \author{
   Chen, Tzu-Chieh\\
   \texttt{tcchenbtx}
@@ -174,7 +173,7 @@ Afterwards, we performed convolution to generate predicted BOLD signals for this
 dataset.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=100mm]{sub002_run001_bold_prediction.png}
+\includegraphics[width=100mm]{sub001_run001_bold_prediction.png}
 \caption{Stimulation Bold}
 \end{figure}
 
@@ -198,6 +197,17 @@ and shoe, the respective within-category correlations are higher than
 all of that object?s between-category correlations with other objects. 
 For chair and scissors, the within-category correlations are not higher 
 than all of their between-category correlations.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=90mm]{3d_correlation_table_sub001.png}
+\caption{3D Correlation Table for Subject 1}
+\end{figure}
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{3d_non_max_correlation_table_sub001.png}                   
+\caption{3D Correlation Excluding Maximally Responding Voxels for Subject 1}                                    
+\end{figure}
 
 \section{Discussion}
 
