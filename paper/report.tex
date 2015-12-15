@@ -209,6 +209,79 @@ than all of their between-category correlations.
 \caption{3D Correlation Excluding Maximally Responding Voxels for Subject 1}                                    
 \end{figure}
 
+In the correlation analysis, some questions we wanted to answer were
+would the time series correlation tables be similar to ones produced from
+the linear regression process if we looked at the raw nii data, how would
+the correlations differ between the same and different objects, and was the
+experiment designed in such a way so that correlations are the approximately
+the same with different runs and subjects. The first step in the time series
+analysis was retrieving a particular subset of the brain from the raw data.
+This was done by getting the entire 4-D data, applying a mask on the 4-D data
+to remove any noises, and using the same subsetted brain as the linear
+regression process. Then, we averaged the subsetted brain into an array that
+represents the BOLD signal responses from the beginning to the end of each run.
+The array has a length of 121, which is the same as the length of each run.
+Next, based on the condition files of each subject and run, we segmented the
+array and created a time series array for each of the eight objects. The
+condition files specified when an object was shown and for how long; thus,
+giving us a particular range to subset precisely. Finally, we grouped the
+object time series arrays into either even or odd runs. This allows us to
+compare averaged even and odd object runs to one another and generate
+Pearson Correlation coefficients. At the end of this analysis, six correlation
+tables were generated.
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_corrFunc.png}                   
+\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1}                                    
+\end{figure}
+
+
+On the time-side analysis, we were able to fit autoregressive integrated
+moving average (ARIMA) models to the BOLD signal responses. This allowed us to
+see how good of a fit a time series model is compared to the raw data and 
+predict BOLD signal responses without having to know an object a subject is 
+looking at. To see if we could initally fit a time-side model, we looked at
+subject one run one's data. An autocorrelation and partial autocorrelation 
+plot of the run's raw BOLD signals was generated. 
+
+There is a significant lag cut-off after lag two in the partial autocorrelation plot, 
+which means the autoregressive order should be at least two. The cut-off in 
+the autocorrelation plot was at lag four, indiciating the moving average 
+order should be four. To ensure these are the right orders for the ARIMA model, 
+an auto.Arima() function was used to automate the parameter search process. 
+In subject one run one, the best ARIMA model was ARIMA(2, 0, 0). 
+Upon fitting the model, the residual's autocorrelation and partial 
+autocorrelation plot were looked at to ensure a goodness of fit. 
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_residcorrFunc.png}                   
+\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1 Residuals}                                    
+\end{figure}
+
+In both plots, the significant lag cuts off after lag one;
+thus, showing that the residuals have no serial correlation. In addition, the
+Ljung-Box test was used to validate this assumption. It has a null hypothesis
+that the residuals are independently distributed and uncorrelated, with an
+altnerative hypothesis that they are correlated. The p-value came out to be
+0.6071, so we accept the null. One trend that came up was that there were
+no periods of volatility in the residuals plot; thus, we could not look into
+an ARIMA-GARCH hybrid model.
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{sub001_run001_residFit.png}                   
+\caption{Residuals of ARIMA Model}                                    
+\end{figure}
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{AFTS.png}                   
+\caption{Actual vs Fitted Values of Subject 1 Run 1}                                    
+\end{figure}
+
+
 \section{Discussion}
 
 Most of the within-category correlations we found are fairly similar than the paper?s. 
@@ -228,35 +301,65 @@ within-category correlations, most correlation values across all categories drop
 after we removed the maximally-responsive voxels. This might be an indication 
 that most of the highly correlated areas tend to have higher responses. \\
 
+Looking at the correlation tables, the first thing that we noticed was that
+the time series correlation tables were much more different from the linear
+regression correlation tables. Even though the same subset of the brain was 
+used, the time series tables exclusively had negative correlations, higher 
+correlations with dissimilar objects against same objects, and even negative
+correlations with the same objects. \\
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{subtracted_correlation_table_sub001.png}                   
+\caption{3D Correlation Time Series Table for Subject 1}                                    
+\end{figure}
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{subtracted_correlation_table_sub003.png}                   
+\caption{3D Correlation Time Series Table for Subject 3}                                    
+\end{figure}
+
+
+These differences could have come from how
+the two processes were executed. For example, the linear regression process
+involved convolving the data and transforming the data with beta values, 
+whereas the time series analysis only looked at the raw data. Thus, this is
+the most likely reason as to why the tables differed. The second thing the time
+series correlation tables had was that across the six subjects, no two subjects
+had similar correlation results. This confirms one of our hypothesis that 
+the brain is a complex structure that will never give consistent results even
+with a well designed experiment. What this means is that the BOLD signal
+responses are not exactly 100\% comparable and it should be expected to have
+contrasting correlation coefficients. One last point to bring up is that
+the BOLD signals were not consistent across a subject's runs. In one run, a
+cat BOLD signal would come out at an intensity of 10,800 and then in another,
+it would come out to 10,500. One question we wanted to answer was given the
+objects, can we predict the BOLD signal responses? Given that an object's
+BOLD signal was never the same, this showed us that we couldn't answer that
+particular question. Thus, we were unable to conclude anything regarding
+predicting a BOLD signal given the objects. \\
+
+In terms of time series analysis, now that there is a good model 
+for one particular run, we can go about
+answering the original questions we had with time-side analysis. When we 
+plotted the actual to the fitted values, we see that the ARIMA model was 
+able to capture the actual values very well. This allows us to get into
+forecasting and predicting future responses. However, one limiation with
+the python StatsModel package is that there are no forecasting methods
+available. Thus, no further progress could be done unless R was available
+as a tool. \\
+
 There are a lot of problems that came up during our analysis. To begin with, 
 since most of us have limited neuroscience knowledge, it was very difficult 
 just to understand the study and the data itself. The research paper of the 
 study uses specific and technical terms that make it hard to comprehend. 
-More time was spent at the earlier stages of this project rereading the 
+More time was spent at the earlier stages rereading the 
 original paper and exploring the data folders than expected, which slowed down 
-our progress for analysis. Therefore, we only had time to investigate one 
-subject and one run so far. Now that we have a better understanding of the 
-study and the data, we hope to repeat our analysis on the remaining subjects.\\
-
-After we understood which part of the data to use, we started our 
-exploratory data analysis. There is a lot of noise within the original dataset, 
-causing insignificant p-values for test statistics, such as t-tests. Moreover, 
-the noise in the original dataset produces low-resolution brain images, 
-which are not meaningful for our further analysis. Pre-processing of data, 
-including the removal of outliers using techniques from homework 2, was 
-performed. In addition, we used smoothing techniques to create clearer 
-and more meaningful images. \\
-
-Furthermore, we faced problems recently that are yet to be resolved. Since 
-subjects' heads often slowly move to a certain direction during fMRI scans, 
-drifting of time series graph of BOLD signals is observed. We are planning 
-to apply time series analysis modeling techniques, which will hopefully take 
-the drifting into account and improve the accuracy of our models. Also, the 
-BOLD signals change differs from subject to subject, making it difficult to 
-compare signals from the same run between subjects. We would need to 
-find a statistical valid way to standardize the BOLD signals, so we could 
-analyze how BOLD signals under different conditions are related to each 
-other across subjects. \\
+our progress for analysis. Moreover, the values from correlation analysis 
+did not come out as clean as we hoped, which also set our progress back. 
+We did not end up have time to apply machine learning techniques for 
+predictions as we originally splanned to. \\
 
 \bibliography{project}
 
