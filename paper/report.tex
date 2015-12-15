@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 
 \title{\textbf{Team Zeta Project Report}\\
-Linear Modeling and Time Series Analysis of Visual Pattern Recognition}\\
+Linear Modeling and Time Series Analysis of Visual Pattern Recognition}
 \author{
   Chen, Tzu-Chieh\\
   \texttt{tcchenbtx}
@@ -27,46 +27,49 @@ Linear Modeling and Time Series Analysis of Visual Pattern Recognition}\\
 \maketitle
 
 \abstract{}
-Visual recognition is a complicated process in our brain. Studying how the brain
- performs during it helps us improve our understanding of brain functionality. 
- Therefore, we want to use the dataset from Haxby et al?s study, Distributed and 
- Overlapping Representations of Faces and Objects in Ventral Temporal Cortex 
- to answer the following questions. If one presents different types of visual 
- stimuli to a subject, would each stimulus evoke the same category-specific 
- pattern of response in the ventral object vision pathway? Furthermore, can 
- one fit a time series model to replicate the behavior of the BOLD signal from 
- the responses? Also, can one use time series to match the correlation values 
- of categories found in the study? 
+Visual recognition is a complicated process in our brain. 
+Studying how the brain performs during it helps us improve our 
+understanding of brain functionality. Therefore, we want to use the dataset 
+from Haxby et al’s study, Distributed and Overlapping Representations of 
+Faces and Objects in Ventral Temporal Cortex to answer the following questions.
+If one presents different types of visual stimuli to a subject, would 
+each stimulus evoke the same category-specific pattern of response in 
+the ventral object vision pathway? Furthermore, can one fit a time series 
+model to replicate the behavior of the BOLD signal from the responses? 
+Also, can one use time series to match the correlation values of 
+categories found in the study? \\
 
 To study these questions, we performed linear modeling and ARIMA based 
-times series analysis with this dataset. We found there is a consistent pattern 
-for a subject to recognize one specific object. Even when we excluded maximally 
-responding areas from the analysis, there was still a consistent pattern for visual 
-recognition. Interestingly, our analysis showed that different subjects have 
-different visual recognition patterns. Although these patterns differed greatly 
-across subjects, they were consistent within subjects, In other words, even 
-though subject one has different patterns from subject two, they both had 
-similar patterns among themselves when visually stimulated.
+times series analysis with this dataset. We found there is a consistent 
+pattern for a subject to recognize one specific object. 
+Even when we excluded maximally responding areas from the analysis, 
+there was still a consistent pattern for visual recognition. Interestingly, 
+our analysis showed that different subjects have different visual recognition 
+patterns. Although these patterns differed greatly across subjects, 
+they were consistent within subjects. In other words, even though subject
+one has different patterns from subject two, they both had similar patterns 
+among themselves when visually stimulated.\\ 
 
 \section{Introduction}
 
-In Haxby et al's study, \emph{Distributed and Overlapping Representations of Faces
-and Objects in Ventral Temporal Cortex}\cite{objectrec}, researchers collected data 
-from six subjects, including five females and one male. 
+In Haxby et al's study, \emph{Distributed and Overlapping Representations of 
+Faces and Objects in Ventral Temporal Cortex}\cite{objectrec}, researchers
+collected data from six subjects, including five females and one male. 
 Different categories of pictures were presented to subjects as visual stimuli.
 The categories are faces, cats, chairs, shoes, bottles, tools, houses, 
 and a control category of phase-scrambled images.
 The study aimed to answer the following questions: if we present 
-different categories of visual stimuli to a subject, will category-specific response be 
-evoked in the ventral cortex? \\
+different categories of visual stimuli to a subject, will category-specific 
+response be evoked in the ventral cortex? \\
 
 Each subject was placed into a functional magnetic resonance imaging 
-(fMRI) facility for 12 times. One complete experiment run lasted 300s. It began 
-with 12s of rest, followed by 8 stimulus blocks of 24s duration, one for 
-each category of visual stimuli. There were 12s intervals of rest between 
-every two blocks, and the whole procedure ended with another 12s of rest. 
-Each picture stimulus were presented for 0.5s followed by an inter-stimulus 
-interval of 1.5ms. 12 stimuli were presented during each stimulus 
+(fMRI) facility for 12 experiment runs. One complete experiment run lasted 300s.
+It began with 12s of rest, followed by 8 stimulus blocks of 24s duration, 
+one for each category of visual stimuli. There were 12s intervals of 
+rest between every two blocks, and the whole procedure ended 
+with another 12s of rest. Each picture stimulus was presented
+for 0.5s followed by an inter-stimulus interval of 1.5ms. 
+12 stimuli were presented during each stimulus 
 block, and a total of 96 stimuli in a complete experiment run.\\
 
 In the study, the data collected for each subject were split into two 
@@ -74,15 +77,15 @@ runs: odd runs and even runs. Correlation was used as the indication of
 response similarity. Results from analyzing within-category and 
 between-category correlations suggest that a lot of response patterns 
 are overlapping. In the overlaps, there are parts of the cortex that respond 
-more to a certain stimuli than others. The study defines these responses as 
+more to a certain stimuli than others. The study defined these responses as 
 maximal response. In order to gain more insights from the non-overlapping 
-parts of the responses, the study tests whether the patterns of non-maximal 
+parts of the responses, the study tested whether the patterns of non-maximal 
 responses carry category-related information. Voxels that responded maximally 
-to were excluded from this calculation of correlations. The results show that the 
-removal of maximally responsive voxels from correlation calculations 
-barely diminishes the accuracy of identification. The study concludes 
+were excluded from this calculation of correlations. The results shown
+that the removal of maximally responsive voxels from correlation calculations 
+barely diminishes the accuracy of identification. The study concluded 
 that both the pattern of large and small responses and the location 
-of large responses carry category-related information; and small responses 
+of large responses carry category-related information and small responses
 are an integral part of the representation.\\
 
 \section{Data}
@@ -114,6 +117,12 @@ In each task run directory, we can find the fMRI result (bold.nii.gz) and
 a QA sub-directory with that run's time series analysis report, fMRI results
 pre-processing and confound files, and visualization of the brain (nii files).\\ 
 
+The preprocessed data for this ds105 dataset can be found and download from
+https://nipy.bic.berkeley.edu/rcsds/. 
+The processing applied to these fMRI scans includes: 
+high-pass filtering in time (to remove low frequency drifts / noise, 
+and registration to a standard anatomical template (the MNI template).\\
+
 \section{Methods}
 
 For each subject, there are eight condition files corresponding 
@@ -129,16 +138,15 @@ onto the specified time intervals needed. After repeating this process
 for all objects, we created regressors and built our design matrix. 
 Lastly, we fitted a linear model to the predicted BOLD signals 
 from convolution, and gathered a mean RSS value. We then applied the contrast
-function to investigate whether each object shows a response pattern in the brain.
-Unfortunately, initial images produced did not show sufficient contrast, 
+function to investigate whether each object shows a response pattern in the 
+brain.Unfortunately, initial images produced did not show sufficient contrast, 
 making it difficult to observe patterns. Thus, we used smoothing techniques to 
 produce better images. For smoothing, we applied Gaussian filters over an
 array of voxel intensity values to generate images that are more appealing
 to the human eye and easier to identify different parts of the brain.
 The downside of this technique is that the new patterns identified can
 potentially be false since the data is transformed. We then repeated our 
-data analysis with the rest of the subjects.
- \\
+data analysis with the rest of the subjects. \\
 
 We used various statistical methods and tests in our analysis. First,
 we built a general linear model to provide estimates for the magnitude of
@@ -149,13 +157,13 @@ data are time series, and we performed appropriate analysis such as
 an object correlation table for each subject and an autoregressive integrated
 moving average model to predict and fit the BOLD signal responses. 
 Finally, in order to validate our models and data analysis, we looked 
-at mean squared errors to judge how well our model performs. \\
+at the mean squared errors to judge how well our model performs. \\
 
 For correlation analysis, we divided all the runs into two groups (odd and even)
 , and we aggregated all the results from each object within the group. Then, 
 we computed the correlations between the average beta values of each object 
 of each group and all objects in the opposite group. Take all the even runs 
-where the subject was shown an image of a face as an example. We take 
+where the subject was shown an image of a face as an example, we took 
 the compiled array of beta values, and found the correlation between this 
 array and that generated from all the odd runs where the subject was shown 
 the images of a face, bottle, cat, chair, house, scissors, scrambledpix, and 
@@ -164,9 +172,9 @@ procedures with all the other objects, we created a 8x8 correlation matrix. \\
 
 \section{Results}
 
-Since we started our analysis with subject 1, run001, we will first display those
-results. We performed initial analysis to attempt to identify specific brain region 
-for recognizing specific object, such as face or house. 
+Since we started our analysis with subject 1, run001, we will first display 
+those results. We performed initial analysis to attempt to identify specific 
+brain region for recognizing specific object, such as face or house. 
 
 Here are the outliers we identified and removed. \\
 \begin{figure}[h!]
@@ -194,37 +202,130 @@ dataset.
 
 These convolved results for each objects were used as parameters in 
 our design matrix for linear regression. To avoid the drifting problem, we also 
-included two drift parameters in the design matrix. The final design matrix was 
-arranged as followed: bottle, cat, chair, face, house, scissors, scrambledpix, 
-shoe, drift1, drift2, average(all ones). 
+included two drift parameters in the design matrix (as shown i Fig. 4). 
+The final design matrix was arranged as followed: 
+bottle, cat, chair, face, house, scissors, scrambledpix, 
+shoe, drift1, drift2, and ones (for background) 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=90mm]{design_matrix_sub001_run001.png}
 \caption{Design Matrix}
 \end{figure}
 
-As mentioned above, we ran correlation analysis on the beta values.
-None of the correlation values are perfectly 1. The diagonal values 
-are correlations between each object with their respective odd or 
-even runs (within-category correlations). All within-category correlation 
-values are larger than 0.6. For bottle, cat, face, house, scrambledpix, 
-and shoe, the respective within-category correlations are higher than 
-all of that object?s between-category correlations with other objects. 
-For chair and scissors, the within-category correlations are not higher 
-than all of their between-category correlations.
+As for the dataset, after removing the outliers and smoothing the data, 
+we subset the brain region to perform analysis on brain areas.
+We then used the design matrix to run linear modeling on the brain subset 
+to get beta values. 
+These beta bata values helped us to identify specific brain area and 
+pattern for a subject under specific visual stimulation like house:
+
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm]{3d_correlation_table_sub001.png}
-\caption{3D Correlation Table for Subject 1}
+\includegraphics[width=90mm, height = 90mm]%
+{betas_for_sub001_run001_house.png}
+\caption{Betas for Sub001 Run001}
 \end{figure}
+
+
+As mentioned above, we want to run correlation analysis on the beta values.
+We first focus on the correlation analysis on a 2D brain slice. To do that, 
+we selected the most responding 2D brain area to perform the analysis. 
+In the initial analysis, we tried to compare between run1 and 
+run2 of subject1. We expected to see high correlation within category 
+and low correlation between category. For instance, the run1 house and 
+run2 house should have high correlation, whereas the run1 house and run2 face 
+should have a low correlation. The 2D brain slice for the corresponding 
+conditions are shown here:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=90mm]%
+{sub001_run_figure_compile.png}
+\caption{Sub001 2D Compiled}
+\end{figure}
+
+Unfortunately, after performing this initial study, we didn’t get what 
+we expected. However, some comparison across different runs shown our 
+expected results. These observations indicated that there might be a 
+variation in the results across runs. 
+Therefore, to reduce the impact of variation across runs, we compiled the 
+even run results and odd run results separately and used them to perform
+correlation analysis. The mean results for even run and odd run shown similar
+patter:
 
 \begin{figure}[h!]                                                              
 \centering                                                                      
-\includegraphics[width=90mm]{3d_non_max_correlation_table_sub001.png}                   
-\caption{3D Correlation Excluding Maximally Responding Voxels for Subject 1}                                    
+\includegraphics[width=90mm]%                                                   
+{odd_even_compile_sub001.png}                                                 
+\caption{Sub001 Odd and Even run results}                                                    
 \end{figure}
 
-In the correlation analysis, some questions we wanted to answer were
+The within category correlation increased and is relatively  higher than
+between category correlation (as shown in appendix). Excluding maximally
+responding areas shown the similar pattern indicating the both the pattern of
+large and small responses and the location of responses carry category-related
+information.\\
+
+Since the brain is a 3D structure, the visual recognition is processed in the
+entire brain. Therefore, we next focus on the 3D brain slice to perform 
+correlation analysis. The correlation table between even and odd runs are
+listed below and shown as bar plots in appendix:
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{3d_correlation_table_sub001.png}                   
+\caption{3D Correlation Table for Subject 1}                                    
+\end{figure}                                                                    
+                                                                                
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{3d_non_max_correlation_table_sub001.png}           
+\caption{3D Correlation Excluding Maximally Responding Voxels for Subject 1}    
+\end{figure}     
+
+
+As shown in the tables above, none of the correlation values are perfectly 1. 
+The diagonal values are correlations between each object with their 
+respective odd or 
+even runs (within-category correlations). All within-category correlation 
+values are larger than 0.6. For bottle, cat, face, house, scrambledpix, 
+and shoe, the respective within-category correlations are higher than 
+all of that object's between-category correlations with other objects.
+For chair and scissors, the within-category correlations are not higher 
+than all of their between-category correlations. Removing the maximally 
+response area gave us the similar analytic results. This is consistent
+with our findings on 2D correlation analysis.\\
+
+Next, to further study whether the observation is consistent across subjects,
+we performed the same analysis in all subjects of this dataset.
+Interestingly, the brain pattern for visual recognition is different across
+subjects. This might increase the variation for cross subjects analysis.
+The mean correlation table was then created to statistically study the 
+correlation pattern across subjects with and without maximally response areas:
+
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{3d_total_correlation_table.png}                   
+\caption{Mean 3D Correlation Table Across Subjects}
+\end{figure}                                                                    
+                                                                                
+\begin{figure}[h!]                                                              
+\centering                                                                      
+\includegraphics[width=90mm]{3d_total_correlation_table_non_max.png}           
+\caption{Mean 3D Correlation Table Excluding Maximally Responding Voxels Across
+Subjects}    
+\end{figure} 
+
+Since there is high variation across subjects, all the correlation numbers
+increased. However, the within category correlation was still relatively 
+higher than between category correlation. The correlation without maximally
+responded areas shown similar pattern. This again confirmed our and 
+Haxby et al’s finding that both the pattern of   
+large and small responses and the location of responses carry category-related  
+information.\\
+
+
+In time series correlation analysis, some questions we wanted to answer were
 would the time series correlation tables be similar to ones produced from
 the linear regression process if we looked at the raw nii data, how would
 the correlations differ between the same and different objects, and was the
@@ -260,7 +361,8 @@ looking at. To see if we could initally fit a time-side model, we looked at
 subject one run one's data. An autocorrelation and partial autocorrelation 
 plot of the run's raw BOLD signals was generated. 
 
-There is a significant lag cut-off after lag two in the partial autocorrelation plot, 
+There is a significant lag cut-off after lag two in the 
+partial autocorrelation plot, 
 which means the autoregressive order should be at least two. The cut-off in 
 the autocorrelation plot was at lag four, indiciating the moving average 
 order should be four. To ensure these are the right orders for the ARIMA model, 
