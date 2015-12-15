@@ -1,12 +1,12 @@
 .PHONY: all structure data validate analysis figures 
 		report clean test verbose coverage
 
-all: clean coverage test data validate analysis report
-	 cd code && make all
+all: cd code && make all
 	 cd data && make all
 	 cd paper && make all
 	 cd proposal && make all
 	 cd slides && make all
+	 coverage test data validate analysis report clean
 
 structure:
 	cd data && make structure
@@ -25,7 +25,7 @@ figures:
 	cd paper && make figures
 
 report:
-	pdflatex -interaction=nonstopmode report.tex
+	cd paper && pdflatex -interaction=nonstopmode report.tex
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
