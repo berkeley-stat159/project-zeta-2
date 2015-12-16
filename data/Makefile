@@ -12,7 +12,7 @@ data:
 	# download preprocessed data
 	wget --no-check-certificate https://nipy.bic.berkeley.edu/rcsds/ds105_mnifunc.tar
 	# unzip preprocessed data
-	tar -xvzf ./ds105_mnifunc.tar
+	tar -xvf ./ds105_mnifunc.tar
 	# rename folder:
 	mv ds105 ds105_new
 	# download actc.txt
