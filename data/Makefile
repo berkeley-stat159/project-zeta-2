@@ -22,4 +22,7 @@ data:
 validate:
 	python data.py
 
-all: structure data validate
+all: 
+	make structure 
+	make data 
+	make validate

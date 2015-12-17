@@ -48,7 +48,7 @@ our analysis showed that different subjects have different visual recognition
 patterns. Although these patterns differed greatly across subjects, 
 they were consistent within subjects. In other words, even though subject
 one has different patterns from subject two, they both had similar patterns 
-among themselves when visually stimulated.\\ 
+among themselves when visually stimulated.\\
 
 \section{Introduction}
 
@@ -63,8 +63,8 @@ different categories of visual stimuli to a subject, will category-specific
 response be evoked in the ventral cortex? \\
 
 Each subject was placed into a functional magnetic resonance imaging 
-(fMRI) facility for 12 experiment runs. One complete experiment run lasted 300s.
-It began with 12s of rest, followed by 8 stimulus blocks of 24s duration, 
+(fMRI) facility for 12 experiment runs. One complete experiment run lasted 
+300s. It began with 12s of rest, followed by 8 stimulus blocks of 24s duration, 
 one for each category of visual stimuli. There were 12s intervals of 
 rest between every two blocks, and the whole procedure ended 
 with another 12s of rest. Each picture stimulus was presented
@@ -92,10 +92,10 @@ are an integral part of the representation.\\
 
 The study's curated dataset can be found and downloaded on the OpenfMRI 
 database with ds105's accession number. The ds105 
-sub-directory contains files detailing this study, including general information 
-(README file), related research articles (references.txt), detail information 
-and update for this released dataset (release\textunderscore history.txt), 
-the MR repetition time (scan\textunderscore key.txt), the name 
+sub-directory contains files detailing this study, including general 
+information (README file), related research articles (references.txt), detail 
+information and update for this released dataset (release\textunderscore 
+history.txt), the MR repetition time (scan\textunderscore key.txt), the name 
 (study\textunderscore key.txt), and the major task for this study 
 (object viewing) (task\textunderscore key.txt). In addition, the models folder 
 contains files with the key conditions (list of object categories) 
@@ -115,7 +115,9 @@ onset time (in seconds), and the duration and weighting for each conditions
 contains fMRI results for all 12 task runs for each subject respectively. 
 In each task run directory, we can find the fMRI result (bold.nii.gz) and 
 a QA sub-directory with that run's time series analysis report, fMRI results
-pre-processing and confound files, and visualization of the brain (nii files).\\ 
+pre-processing and confound files, and visualization of the brain 
+(nii files).\\ 
+
 
 The preprocessed data for this ds105 dataset can be found and download from
 https://nipy.bic.berkeley.edu/rcsds/. 
@@ -159,11 +161,11 @@ moving average model to predict and fit the BOLD signal responses.
 Finally, in order to validate our models and data analysis, we looked 
 at the mean squared errors to judge how well our model performs. \\
 
-For correlation analysis, we divided all the runs into two groups (odd and even)
-, and we aggregated all the results from each object within the group. Then, 
-we computed the correlations between the average beta values of each object 
-of each group and all objects in the opposite group. Take all the even runs 
-where the subject was shown an image of a face as an example, we took 
+For correlation analysis, we divided all the runs into two groups (odd and 
+even), and we aggregated all the results from each object within the group. 
+Then, we computed the correlations between the average beta values of each 
+object of each group and all objects in the opposite group. Take all the even 
+runs where the subject was shown an image of a face as an example, we took 
 the compiled array of beta values, and found the correlation between this 
 array and that generated from all the odd runs where the subject was shown 
 the images of a face, bottle, cat, chair, house, scissors, scrambledpix, and 
@@ -176,7 +178,7 @@ Since we started our analysis with subject 1, run001, we will first display
 those results. We performed initial analysis to attempt to identify specific 
 brain region for recognizing specific object, such as face or house. 
 
-Here are the outliers we identified and removed. \\
+Here are the outliers we identified and removed.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=90mm]{Volume_RMS_Difference_Outliers_sub001_run001.png}
@@ -186,17 +188,17 @@ Here are the outliers we identified and removed. \\
 Then, we generated task time course with the event2neural function.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm]{Task_time_course_sub001_run001.png}
+\includegraphics[width=90mm, height=60mm]{Task_time_course_sub001_run001.png}
 \caption{Task Time Course}
 \end{figure}
 
 \pagebreak 
 
-Afterwards, we performed convolution to generate predicted BOLD signals for this 
-dataset.
+Afterwards, we performed convolution to generate predicted BOLD signals for 
+this dataset.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=100mm]{sub001_run001_bold_prediction.png}
+\includegraphics[width=90mm, height=60mm]{sub001_run001_bold_prediction.png}
 \caption{Stimulation Bold}
 \end{figure}
 
@@ -221,8 +223,7 @@ pattern for a subject under specific visual stimulation like house:
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm, height = 90mm]%
-{betas_for_sub001_run001_house.png}
+\includegraphics[width=90mm, height = 90mm]{betas_for_sub001_run001_house.png}
 \caption{Betas for Sub001 Run001}
 \end{figure}
 
@@ -239,8 +240,7 @@ conditions are shown here:
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=90mm]%
-{sub001_run_figure_compile.png}
+\includegraphics[width=90mm]{sub001_run_figure_compile.png}
 \caption{Sub001 2D Compiled}
 \end{figure}
 
@@ -255,8 +255,7 @@ patter:
 
 \begin{figure}[h!]                                                              
 \centering                                                                      
-\includegraphics[width=90mm]%                                                   
-{odd_even_compile_sub001.png}                                                 
+\includegraphics[width=90mm]{odd_even_compile_sub001.png}                                                 
 \caption{Sub001 Odd and Even run results}                                                    
 \end{figure}
 
@@ -374,7 +373,8 @@ autocorrelation plot were looked at to ensure a goodness of fit.
 \begin{figure}[h!]                                                              
 \centering                                                                      
 \includegraphics[width=90mm]{sub001_run001_residcorrFunc.png}                   
-\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1 Residuals}                                    
+\caption{Autocorrelation and Partial Autocorrelation for Subject 1 Run 1 
+Residuals}                                    
 \end{figure}
 
 In both plots, the significant lag cuts off after lag one;
@@ -401,22 +401,25 @@ an ARIMA-GARCH hybrid model.
 
 \section{Discussion}
 
-Most of the within-category correlations we found are fairly similar than the paper?s. 
-Some of the values from our analysis are higher than the paper?s, which could be 
-due to the fact that we only analyzed correlations between runs for one subject, 
-while the original research paper studied all subjects. It would make sense that 
-correlations are higher when only analyzing brain activity from one brain. \\
+Most of the within-category correlations we found are fairly similar than the 
+paper?s. Some of the values from our analysis are higher than the paper?s, 
+which could be 
+due to the fact that we only analyzed correlations between runs for one 
+subject, while the original research paper studied all subjects. It would make 
+sense that correlations are higher when only analyzing brain activity from one 
+brain. \\
 
 Correlations between different objects (between-category correlations) seem 
 fairly random, which also seem to be in line with the original paper?s finding. 
 We observe that our between-category correlation values also tend to be higher 
 than those from the paper. \\
 
-To test the reproducibility of the study, we also redid our correlation analysis 
-after excluding the maximally-responsive voxels. With the exception of some 
-within-category correlations, most correlation values across all categories dropped 
-after we removed the maximally-responsive voxels. This might be an indication 
-that most of the highly correlated areas tend to have higher responses. \\
+To test the reproducibility of the study, we also redid our correlation 
+analysis after excluding the maximally-responsive voxels. With the exception of 
+some within-category correlations, most correlation values across all 
+categories dropped after we removed the maximally-responsive voxels. This might 
+be an indication that most of the highly correlated areas tend to have higher 
+responses. \\
 
 Looking at the correlation tables, the first thing that we noticed was that
 the time series correlation tables were much more different from the linear
@@ -480,8 +483,7 @@ predictions as we originally splanned to. \\
 
 \bibliography{project}
 
-\include{appendix1_general}
-\include{appendix2_subject1}
-\include{appendix3_cross_subject}
+\include{appendix1_subject1}
+\include{appendix2_cross_subject}
 
 \end{document}
