@@ -25,7 +25,7 @@ figures:
 	cd paper && make figures
 
 report:
-	cd paper && pdflatex -interaction=nonstopmode report.tex
+	cd paper && make all
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
